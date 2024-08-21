@@ -39,6 +39,16 @@ jobs:
         solution-name: BPFCustomizations
         solution-output-file: out/exported/ALMLab.zip
 
+    - name: Check if export failed and trigger retry workflow
+      if: steps.export.outcome == 'failure'
+      uses: peter-evans/workflow-dispatch@v1
+      with:
+        workflow: retry-export-solution.yml
+        ref: ${{ github.ref }}
+        inputs:
+          solution-name: BPFCustomizations
+          solution-output-file: out/exported/ALMLab.zip
+
     - name: unpack-solution action
       uses: microsoft/powerplatform-actions/unpack-solution@v0
       with:
