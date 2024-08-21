@@ -30,32 +30,14 @@ jobs:
         user-name: 'slilly@farmhandcrm.onmicrosoft.com'
         password-secret: ${{ secrets.password }}
 
-    - name: export-solution action with retry
-      run: |
-        retries=3
-        count=0
-        until [ $count -ge $retries ]
-        do
-          echo "Attempting to export solution... (Attempt $((count+1))/$retries)"
-          if gh workflow run microsoft/powerplatform-actions/export-solution@v0 --with \
-            environment-url='https://farmhanddev.crm4.dynamics.com/' \
-            user-name='slilly@farmhandcrm.onmicrosoft.com' \
-            password-secret=${{ secrets.password }} \
-            solution-name=BPFCustomizations \
-            solution-output-file=out/exported/ALMLab.zip; then
-            echo "Export succeeded on attempt $((count+1))"
-            break
-          fi
-          count=$((count+1))
-          if [ $count -lt $retries ]; then
-            echo "Export failed, retrying in 10 seconds..."
-            sleep 10
-          else
-            echo "All $retries attempts failed."
-            exit 1
-          fi
-        done
-      shell: bash
+    - name: export-solution action
+      uses: microsoft/powerplatform-actions/export-solution@v0
+      with:
+        environment-url: 'https://farmhanddev.crm4.dynamics.com/'
+        user-name: 'slilly@FarmhandCRM.onmicrosoft.com'
+        password-secret: ${{ secrets.password }}
+        solution-name: ALMLab
+        solution-output-file: out/exported/ALMLab.zip
 
     - name: unpack-solution action
       uses: microsoft/powerplatform-actions/unpack-solution@v0
