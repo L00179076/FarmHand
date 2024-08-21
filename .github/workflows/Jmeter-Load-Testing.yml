@@ -1,0 +1,25 @@
+# Step: Setup JMeter
+    - name: Set up Apache JMeter
+      run: |
+        wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.4.1.zip
+        unzip apache-jmeter-5.4.1.zip
+        export JMETER_HOME=$(pwd)/apache-jmeter-5.4.1
+        export PATH=$JMETER_HOME/bin:$PATH
+
+    # Step: Run Load Test using JMeter
+    - name: Run JMeter Load Test
+      run: |
+        jmeter -n -t test_plan.jmx -l jmeter_results.jtl -e -o jmeter_html_report
+      continue-on-error: true
+
+    # Step: Upload JMeter Test Results (Optional)
+    - name: Upload JMeter Results
+      uses: actions/upload-artifact@v2
+      with:
+        name: jmeter-results
+        path: jmeter_html_report/
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
