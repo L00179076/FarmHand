@@ -1,0 +1,53 @@
+name: export-solution
+# Export solution from DEV environment, unpack it, prepare, commit, and push a git branch with the changes
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  export-from-dev:
+    runs-on: windows-latest
+    env:
+      RUNNER_DEBUG: 1
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        lfs: true
+
+    - name: Install Power Platform CLI (pac)
+      run: npm install -g pac
+
+    - name: who-am-i action
+      run: |
+        pac auth create --url 'https://org00724b57.crm4.dynamics.com/' --username 'L00179076@atu.ie' --password '${{ secrets.password }}'
+        pac org who
+      shell: cmd
+
+    - name: export-solution action
+      run: |
+        pac solution export --path ./out/exported/ALMLab.zip --name PropertiesAndEstate --managed false
+      shell: cmd
+
+    - name: unpack-solution action
+      run: |
+        pac solution unpack --zipfile ./out/exported/ALMLab.zip --folder ./out/solutions/ALMLab --managed=false
+      shell: cmd
+
+    - name: branch-solution, prepare it for a PullRequest
+      uses: actions/checkout@v2
+
+    - name: Commit and Push Changes
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git add solutions/ALMLab
+        git commit -m "Unpacked solution for PR"
+        git push origin HEAD:${{ github.ref }}
