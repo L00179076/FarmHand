@@ -6,8 +6,31 @@ on:
       - main  # Change this to your branch if necessary
 
 jobs:
+  # Fault Injection Job
+  fault-injection:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'adopt'
+
+    - name: Inject Fault
+      run: |
+        # Simulate fault condition (e.g., stop a service, simulate network failure)
+        echo "Simulating fault condition..."
+        # Add your fault simulation commands here (e.g., disable network, kill process, etc.)
+        # Example: sudo iptables -A OUTPUT -p tcp --dport 80 -j DROP
+
+  # JMeter Test Plan Execution
   jmeter-test:
     runs-on: ubuntu-latest
+    needs: fault-injection  # Ensures this job runs after fault injection
 
     steps:
     - name: Checkout repository
@@ -45,157 +68,191 @@ jobs:
                 </elementProp>
               </ThreadGroup>
               <hashTree>
-                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request">
-                  <stringProp name="HTTPSampler.domain">farmhanddev.crm4.dynamics.com</stringProp>
-                  <stringProp name="HTTPSampler.path">/main.aspx?appid=2d6211aa-bb7b-4184-9f49-e27234313d5a</stringProp>
-                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                  <stringProp name="HTTPSampler.method">GET</stringProp>
-                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                  <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-                    <collectionProp name="Arguments.arguments"/>
-                  </elementProp>
-                </HTTPSamplerProxy>
-                <hashTree>
-                  <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table">
-                    <boolProp name="ResultCollector.error_logging">false</boolProp>
-                    <objProp>
-                      <name>saveConfig</name>
-                      <value class="SampleSaveConfiguration">
-                        <time>true</time>
-                        <latency>true</latency>
-                        <timestamp>true</timestamp>
-                        <success>true</success>
-                        <label>true</label>
-                        <code>true</code>
-                        <message>true</message>
-                        <threadName>true</threadName>
-                        <dataType>true</dataType>
-                        <encoding>false</encoding>
-                        <assertions>true</assertions>
-                        <subresults>true</subresults>
-                        <responseData>false</responseData>
-                        <samplerData>false</samplerData>
-                        <xml>false</xml>
-                        <fieldNames>true</fieldNames>
-                        <responseHeaders>false</responseHeaders>
-                        <requestHeaders>false</requestHeaders>
-                        <responseDataOnError>false</responseDataOnError>
-                        <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                        <assertionsResultsToSave>0</assertionsResultsToSave>
-                        <bytes>true</bytes>
-                        <sentBytes>true</sentBytes>
-                        <url>true</url>
-                        <threadCounts>true</threadCounts>
-                        <idleTime>true</idleTime>
-                        <connectTime>true</connectTime>
-                      </value>
-                    </objProp>
-                    <stringProp name="filename"></stringProp>
-                  </ResultCollector>
+                <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Test with Fault Injection" includeTimers="false">
+                  <!-- Main Request Before Fault -->
+                  <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Pre-Fault Request">
+                    <stringProp name="HTTPSampler.domain">farmhanddev.crm4.dynamics.com</stringProp>
+                    <stringProp name="HTTPSampler.path">/main.aspx?appid=2d6211aa-bb7b-4184-9f49-e27234313d5a</stringProp>
+                    <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                    <stringProp name="HTTPSampler.method">GET</stringProp>
+                    <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                    <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                    <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+                      <collectionProp name="Arguments.arguments"/>
+                    </elementProp>
+                  </HTTPSamplerProxy>
                   <hashTree/>
-                  <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
-                    <boolProp name="ResultCollector.error_logging">false</boolProp>
-                    <objProp>
-                      <name>saveConfig</name>
-                      <value class="SampleSaveConfiguration">
-                        <time>true</time>
-                        <latency>true</latency>
-                        <timestamp>true</timestamp>
-                        <success>true</success>
-                        <label>true</label>
-                        <code>true</code>
-                        <message>true</message>
-                        <threadName>true</threadName>
-                        <dataType>true</dataType>
-                        <encoding>false</encoding>
-                        <assertions>true</assertions>
-                        <subresults>true</subresults>
-                        <responseData>false</responseData>
-                        <samplerData>false</samplerData>
-                        <xml>false</xml>
-                        <fieldNames>true</fieldNames>
-                        <responseHeaders>false</responseHeaders>
-                        <requestHeaders>false</requestHeaders>
-                        <responseDataOnError>false</responseDataOnError>
-                        <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                        <assertionsResultsToSave>0</assertionsResultsToSave>
-                        <bytes>true</bytes>
-                        <sentBytes>true</sentBytes>
-                        <url>true</url>
-                        <threadCounts>true</threadCounts>
-                        <idleTime>true</idleTime>
-                        <connectTime>true</connectTime>
-                      </value>
-                    </objProp>
-                    <stringProp name="filename"></stringProp>
-                  </ResultCollector>
+                  
+                  <!-- Main Request After Fault -->
+                  <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Post-Fault Request">
+                    <stringProp name="HTTPSampler.domain">farmhanddev.crm4.dynamics.com</stringProp>
+                    <stringProp name="HTTPSampler.path">/main.aspx?appid=2d6211aa-bb7b-4184-9f49-e27234313d5a</stringProp>
+                    <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                    <stringProp name="HTTPSampler.method">GET</stringProp>
+                    <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                    <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                    <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+                      <collectionProp name="Arguments.arguments"/>
+                    </elementProp>
+                  </HTTPSamplerProxy>
                   <hashTree/>
-                  <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report">
-                    <boolProp name="ResultCollector.error_logging">false</boolProp>
-                    <objProp>
-                      <name>saveConfig</name>
-                      <value class="SampleSaveConfiguration">
-                        <time>true</time>
-                        <latency>true</latency>
-                        <timestamp>true</timestamp>
-                        <success>true</success>
-                        <label>true</label>
-                        <code>true</code>
-                        <message>true</message>
-                        <threadName>true</threadName>
-                        <dataType>true</dataType>
-                        <encoding>false</encoding>
-                        <assertions>true</assertions>
-                        <subresults>true</subresults>
-                        <responseData>false</responseData>
-                        <samplerData>false</samplerData>
-                        <xml>false</xml>
-                        <fieldNames>true</fieldNames>
-                        <responseHeaders>false</responseHeaders>
-                        <requestHeaders>false</requestHeaders>
-                        <responseDataOnError>false</responseDataOnError>
-                        <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                        <assertionsResultsToSave>0</assertionsResultsToSave>
-                        <bytes>true</bytes>
-                        <sentBytes>true</sentBytes>
-                        <url>true</url>
-                        <threadCounts>true</threadCounts>
-                        <idleTime>true</idleTime>
-                        <connectTime>true</connectTime>
-                      </value>
-                    </objProp>
-                    <stringProp name="filename"></stringProp>
-                  </ResultCollector>
+                  
+                  <!-- Response Assertion to Validate Functionality -->
+                  <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Check Post-Fault Response">
+                    <collectionProp name="Asserion.test_strings">
+                      <stringProp name="assertion.value">Expected Value</stringProp>
+                    </collectionProp>
+                    <stringProp name="Assertion.custom_message">System should operate in degraded mode</stringProp>
+                    <boolProp name="Assertion.assume_success">false</boolProp>
+                    <intProp name="Assertion.test_field">0</intProp>
+                  </ResponseAssertion>
                   <hashTree/>
-                  <ResultCollector guiclass="StatGraphVisualizer" testclass="ResultCollector" testname="Aggregate Graph">
-                    <boolProp name="ResultCollector.error_logging">false</boolProp>
-                    <objProp>
-                      <name>saveConfig</name>
-                      <value class="SampleSaveConfiguration">
-                        <time>true</time>
-                        <latency>true</latency>
-                        <timestamp>true</timestamp>
-                        <success>true</success>
-                        <label>true</label>
-                        <code>true</code>
-                        <message>true</message>
-                        <threadName>true</threadName>
-                        <dataType>true</dataType>
-                        <encoding>false</encoding>
-                        <assertions>true</assertions>
-                        <subresults>true</subresults>
-                        <responseData>false</responseData>
-                        <samplerData>false</samplerData>
-                        <xml>false</xml>
-                        <fieldNames>true</fieldNames>
-                        <responseHeaders>false</responseHeaders>
-                        <requestHeaders>false</requestHeaders>
-                        <responseDataOnError>false</responseDataOnError>
-                        <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                        <assertionsResultsToSave>0</assertionsResultsToSave>
-                        <bytes>true</bytes>
-                        <sentBytes>true</sentBytes>
-                        <url>true</url>
-                        <threadCounts>true</threadCounts>
-                        <idle
+                </TransactionController>
+                <hashTree/>
+                
+                <!-- Result Collectors -->
+                <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table">
+                  <boolProp name="ResultCollector.error_logging">false</boolProp>
+                  <objProp>
+                    <name>saveConfig</name>
+                    <value class="SampleSaveConfiguration">
+                      <time>true</time>
+                      <latency>true</latency>
+                      <timestamp>true</timestamp>
+                      <success>true</success>
+                      <label>true</label>
+                      <code>true</code>
+                      <message>true</message>
+                      <threadName>true</threadName>
+                      <dataType>true</dataType>
+                      <encoding>false</encoding>
+                      <assertions>true</assertions>
+                      <subresults>true</subresults>
+                      <responseData>false</responseData>
+                      <samplerData>false</samplerData>
+                      <xml>false</xml>
+                      <fieldNames>true</fieldNames>
+                      <responseHeaders>false</responseHeaders>
+                      <requestHeaders>false</requestHeaders>
+                      <responseDataOnError>false</responseDataOnError>
+                      <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                      <assertionsResultsToSave>0</assertionsResultsToSave>
+                      <bytes>true</bytes>
+                      <sentBytes>true</sentBytes>
+                      <url>true</url>
+                      <threadCounts>true</threadCounts>
+                      <idleTime>true</idleTime>
+                      <connectTime>true</connectTime>
+                    </value>
+                  </objProp>
+                  <stringProp name="filename">result.jtl</stringProp>
+                </ResultCollector>
+                <hashTree/>
+                <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
+                  <boolProp name="ResultCollector.error_logging">false</boolProp>
+                  <objProp>
+                    <name>saveConfig</name>
+                    <value class="SampleSaveConfiguration">
+                      <time>true</time>
+                      <latency>true</latency>
+                      <timestamp>true</timestamp>
+                      <success>true</success>
+                      <label>true</label>
+                      <code>true</code>
+                      <message>true</message>
+                      <threadName>true</threadName>
+                      <dataType>true</dataType>
+                      <encoding>false</encoding>
+                      <assertions>true</assertions>
+                      <subresults>true</subresults>
+                      <responseData>false</responseData>
+                      <samplerData>false</samplerData>
+                      <xml>false</xml>
+                      <fieldNames>true</fieldNames>
+                      <responseHeaders>false</responseHeaders>
+                      <requestHeaders>false</requestHeaders>
+                      <responseDataOnError>false</responseDataOnError>
+                      <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                      <assertionsResultsToSave>0</assertionsResultsToSave>
+                      <bytes>true</bytes>
+                      <sentBytes>true</sentBytes>
+                      <url>true</url>
+                      <threadCounts>true</threadCounts>
+                      <idleTime>true</idleTime>
+                      <connectTime>true</connectTime>
+                    </value>
+                  </objProp>
+                  <stringProp name="filename">summary_report.jtl</stringProp>
+                </ResultCollector>
+                <hashTree/>
+                <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Statistics">
+                  <boolProp name="ResultCollector.error_logging">false</boolProp>
+                  <objProp>
+                    <name>saveConfig</name>
+                    <value class="SampleSaveConfiguration">
+                      <time>true</time>
+                      <latency>true</latency>
+                      <timestamp>true</timestamp>
+                      <success>true</success>
+                      <label>true</label>
+                      <code>true</code>
+                      <message>true</message>
+                      <threadName>true</threadName>
+                      <dataType>true</dataType>
+                      <encoding>false</encoding>
+                      <assertions>true</assertions>
+                      <subresults>true</subresults>
+                      <responseData>false</responseData>
+                      <samplerData>false</samplerData>
+                      <xml>false</xml>
+                      <fieldNames>true</fieldNames>
+                      <responseHeaders>false</responseHeaders>
+                      <requestHeaders>false</requestHeaders>
+                      <responseDataOnError>false</responseDataOnError>
+                      <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                      <assertionsResultsToSave>0</assertionsResultsToSave>
+                      <bytes>true</bytes>
+                      <sentBytes>true</sentBytes>
+                      <url>true</url>
+                      <threadCounts>true</threadCounts>
+                      <idleTime>true</idleTime>
+                      <connectTime>true</connectTime>
+                    </value>
+                  </objProp>
+                  <stringProp name="filename">stat_report.jtl</stringProp>
+                </ResultCollector>
+                <hashTree/>
+              </hashTree>
+            </hashTree>
+          </hashTree>
+        </jmeterTestPlan>
+        EOF
+
+    - name: Install JMeter
+      run: |
+        wget https://dlcdn.apache.org/jmeter/binaries/apache-jmeter-5.6.3.tgz
+        tar -xzf apache-jmeter-5.6.3.tgz
+        export PATH=$PATH:$PWD/apache-jmeter-5.6.3/bin
+
+    - name: Run JMeter Test Plan
+      run: |
+        jmeter -n -t test_plan.jmx -l result.jtl -e -o reports
+
+  # Upload Results
+  upload-results:
+    runs-on: ubuntu-latest
+    needs: jmeter-test  # Ensures this job runs after JMeter tests
+
+    steps:
+    - name: Upload JMeter Results
+      uses: actions/upload-artifact@v3
+      with:
+        name: jmeter-results
+        path: result.jtl
+        if-no-files-found: error
+
+    - name: Upload HTML Reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: jmeter-html-reports
+        path: reports
