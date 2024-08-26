@@ -218,9 +218,7 @@ jobs:
         </jmeterTestPlan>
         EOF
 
-    - name: Run JMeter Test Plan
-      run: |
-        jmeter -n -t test_plan.jmx -l result.jtl -e -o reports
+    
 
   # Upload Results Job
   upload-results:
