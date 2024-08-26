@@ -335,4 +335,66 @@ jobs:
         </jmeterTestPlan>
         "@ | Set-Content -Path test_plan.jmx -Force
 
+  failure-response-test:
+    needs: setup
+    runs-on: windows-latest
+
+    steps:
+    - name: Create Failure Response Test Plan
+      run: |
+        New-Item -Path reports -ItemType Directory -Force
+        @"
+        <?xml version="1.0" encoding="UTF-8"?>
+        <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+          <hashTree>
+            <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Failure Response Test Plan">
+              <boolProp name="TestPlan.functional_mode">true</boolProp>
+              <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
+              <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+            </TestPlan>
+            <hashTree>
+              <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group">
+                <stringProp name="ThreadGroup.num_threads">50</stringProp>
+                <stringProp name="ThreadGroup.ramp_time">5</stringProp>
+                <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+                  <stringProp name="LoopController.loops">5</stringProp>
+                </elementProp>
+              </ThreadGroup>
+              <hashTree>
+                <!-- Simulate failure -->
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Simulate Failure">
+                  <stringProp name="HTTPSampler.domain">example.com</stringProp>
+                  <stringProp name="HTTPSampler.path">/simulate-failure</stringProp>
+                  <stringProp name="HTTPSampler.method">GET</stringProp>
+                </HTTPSamplerProxy>
+                <hashTree>
+                  <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Check Failure Response">
+                    <stringProp name="ResponseAssertion.test_field">Response Code</stringProp>
+                    <stringProp name="ResponseAssertion.assertion_type">2</stringProp>
+                    <collectionProp name="ResponseAssertion.field_to_check">
+                      <stringProp name="404">404</stringProp>
+                    </collectionProp>
+                  </ResponseAssertion>
+                </hashTree>
+                <!-- Check continued functionality -->
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Check Functionality">
+                  <stringProp name="HTTPSampler.domain">example.com</stringProp>
+                  <stringProp name="HTTPSampler.path">/check-functionality</stringProp>
+                  <stringProp name="HTTPSampler.method">GET</stringProp>
+                </HTTPSamplerProxy>
+                <hashTree>
+                  <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Check Functionality Response">
+                    <stringProp name="ResponseAssertion.test_field">Response Code</stringProp>
+                    <stringProp name="ResponseAssertion.assertion_type">1</stringProp>
+                    <collectionProp name="ResponseAssertion.field_to_check">
+                      <stringProp name="200">200</stringProp>
+                    </collectionProp>
+                  </ResponseAssertion>
+                </hashTree>
+              </hashTree>
+            </hashTree>
+          </hashTree>
+        </jmeterTestPlan>
+        "@ | Set-Content -Path failure_response_test_plan.jmx -Force
+
     
