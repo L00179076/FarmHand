@@ -19,11 +19,17 @@ jobs:
         java-version: '17'
         distribution: 'adopt'
 
-    - name: Download and Install JMeter
+    - name: Set JMeter Path
       run: |
-        Invoke-WebRequest -Uri https://dlcdn.apache.org/jmeter/binaries/apache-jmeter-5.6.3.zip -OutFile jmeter.zip
-        Expand-Archive -Path jmeter.zip -DestinationPath jmeter
-        $env:PATH += ";$(pwd)\jmeter\apache-jmeter-5.6.3\bin"
+        # Define JMeter path
+        $jmeterPath = "C:\Users\TDA\Downloads\apache-jmeter-5.6.3\bin"
+        
+        # Set the environment variable for JMeter
+        [Environment]::SetEnvironmentVariable("JMETER_HOME", $jmeterPath, [System.EnvironmentVariableTarget]::Machine)
+        [Environment]::SetEnvironmentVariable("PATH", "$env:PATH;$jmeterPath", [System.EnvironmentVariableTarget]::Machine)
+        
+        # Output the path for verification
+        Write-Host "JMeter path is $jmeterPath"
 
     - name: Create JMeter Test Plan
       run: |
@@ -331,7 +337,7 @@ jobs:
 
     - name: Run JMeter Test Plan
       run: |
-        jmeter.bat -n -t test_plan.jmx -l result.jtl -e -o reports
+        & "C:\Users\TDA\Downloads\apache-jmeter-5.6.3\bin\jmeter.bat" -n -t test_plan.jmx -l result.jtl -e -o reports
 
     - name: Upload JMeter Results
       uses: actions/upload-artifact@v3
