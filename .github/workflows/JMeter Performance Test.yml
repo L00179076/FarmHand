@@ -337,7 +337,7 @@ jobs:
 
     - name: Run JMeter Test Plan
       run: |
-        & "C:\Users\TDA\Downloads\apache-jmeter-5.6.3\bin\jmeter.bat" -n -t test_plan.jmx -l result.jtl -e -o reports
+        & "C:\Users\TDA\Downloads\apache-jmeter-5.6.3\bin\ApacheJMeter.jar" -n -t test_plan.jmx -l result.jtl -e -o reports
 
     - name: Upload JMeter Results
       uses: actions/upload-artifact@v3
