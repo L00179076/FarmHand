@@ -7,7 +7,7 @@ on:
 
 jobs:
   jmeter-test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Checkout repository
@@ -21,14 +21,14 @@ jobs:
 
     - name: Download and Install JMeter
       run: |
-        wget https://dlcdn.apache.org/jmeter/binaries/apache-jmeter-5.6.3.tgz
-        tar -xzf apache-jmeter-5.6.3.tgz
-        echo "export PATH=$PWD/apache-jmeter-5.6.3/bin:$PATH" >> $GITHUB_ENV
+        Invoke-WebRequest -Uri https://dlcdn.apache.org/jmeter/binaries/apache-jmeter-5.6.3.zip -OutFile jmeter.zip
+        Expand-Archive -Path jmeter.zip -DestinationPath jmeter
+        $env:PATH += ";$(pwd)\jmeter\apache-jmeter-5.6.3\bin"
 
     - name: Create JMeter Test Plan
       run: |
-        mkdir -p reports
-        cat <<EOF > test_plan.jmx
+        New-Item -Path reports -ItemType Directory -Force
+        @"
         <?xml version="1.0" encoding="UTF-8"?>
         <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
           <hashTree>
@@ -327,11 +327,11 @@ jobs:
             </hashTree>
           </hashTree>
         </jmeterTestPlan>
-        EOF
+        "@ | Set-Content -Path test_plan.jmx -Force
 
     - name: Run JMeter Test Plan
       run: |
-        jmeter -n -t test_plan.jmx -l result.jtl -e -o reports
+        jmeter.bat -n -t test_plan.jmx -l result.jtl -e -o reports
 
     - name: Upload JMeter Results
       uses: actions/upload-artifact@v3
