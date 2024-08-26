@@ -27,6 +27,7 @@ jobs:
 
     - name: Create JMeter Test Plan
       run: |
+        mkdir -p reports
         cat <<EOF > test_plan.jmx
         <?xml version="1.0" encoding="UTF-8"?>
         <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
@@ -137,6 +138,43 @@ jobs:
                     <stringProp name="filename">summary_report.jtl</stringProp>
                   </ResultCollector>
                   <hashTree/>
+                  <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report">
+                    <boolProp name="ResultCollector.error_logging">false</boolProp>
+                    <objProp>
+                      <name>saveConfig</name>
+                      <value class="SampleSaveConfiguration">
+                        <time>true</time>
+                        <latency>true</latency>
+                        <timestamp>true</timestamp>
+                        <success>true</success>
+                        <label>true</label>
+                        <code>true</code>
+                        <message>true</message>
+                        <threadName>true</threadName>
+                        <dataType>true</dataType>
+                        <encoding>false</encoding>
+                        <assertions>true</assertions>
+                        <subresults>true</subresults>
+                        <responseData>false</responseData>
+                        <samplerData>false</samplerData>
+                        <xml>false</xml>
+                        <fieldNames>true</fieldNames>
+                        <responseHeaders>false</responseHeaders>
+                        <requestHeaders>false</requestHeaders>
+                        <responseDataOnError>false</responseDataOnError>
+                        <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                        <assertionsResultsToSave>0</assertionsResultsToSave>
+                        <bytes>true</bytes>
+                        <sentBytes>true</sentBytes>
+                        <url>true</url>
+                        <threadCounts>true</threadCounts>
+                        <idleTime>true</idleTime>
+                        <connectTime>true</connectTime>
+                      </value>
+                    </objProp>
+                    <stringProp name="filename">aggregate_report.jtl</stringProp>
+                  </ResultCollector>
+                  <hashTree/>
                   <ResultCollector guiclass="StatGraphVisualizer" testclass="ResultCollector" testname="Aggregate Graph">
                     <boolProp name="ResultCollector.error_logging">false</boolProp>
                     <objProp>
@@ -174,7 +212,7 @@ jobs:
                     <stringProp name="filename">aggregate_graph.jtl</stringProp>
                   </ResultCollector>
                   <hashTree/>
-                  <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Statistics">
+                  <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph">
                     <boolProp name="ResultCollector.error_logging">false</boolProp>
                     <objProp>
                       <name>saveConfig</name>
@@ -208,9 +246,82 @@ jobs:
                         <connectTime>true</connectTime>
                       </value>
                     </objProp>
-                    <stringProp name="filename">stat_report.jtl</stringProp>
+                    <stringProp name="filename">response_time_graph.jtl</stringProp>
                   </ResultCollector>
                   <hashTree/>
+                  <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
+                    <boolProp name="ResultCollector.error_logging">false</boolProp>
+                    <objProp>
+                      <name>saveConfig</name>
+                      <value class="SampleSaveConfiguration">
+                        <time>true</time>
+                        <latency>true</latency>
+                        <timestamp>true</timestamp>
+                        <success>true</success>
+                        <label>true</label>
+                        <code>true</code>
+                        <message>true</message>
+                        <threadName>true</threadName>
+                        <dataType>true</dataType>
+                        <encoding>false</encoding>
+                        <assertions>true</assertions>
+                        <subresults>true</subresults>
+                        <responseData>false</responseData>
+                        <samplerData>false</samplerData>
+                        <xml>false</xml>
+                        <fieldNames>true</fieldNames>
+                        <responseHeaders>false</responseHeaders>
+                        <requestHeaders>false</requestHeaders>
+                        <responseDataOnError>false</responseDataOnError>
+                        <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                        <assertionsResultsToSave>0</assertionsResultsToSave>
+                        <bytes>true</bytes>
+                        <sentBytes>true</sentBytes>
+                        <url>true</url>
+                        <threadCounts>true</threadCounts>
+                        <idleTime>true</idleTime>
+                        <connectTime>true</connectTime>
+                      </value>
+                    </objProp>
+                    <stringProp name="filename">view_results_tree.jtl</stringProp>
+                  </ResultCollector>
+                  <hashTree/>
+                  <ResultCollector guiclass="ComparisonVisualizer" testclass="ResultCollector" testname="Comparison Assertion Visualizer">
+                    <boolProp name="ResultCollector.error_logging">false</boolProp>
+                    <objProp>
+                      <name>saveConfig</name>
+                      <value class="SampleSaveConfiguration">
+                        <time>true</time>
+                        <latency>true</latency>
+                        <timestamp>true</timestamp>
+                        <success>true</success>
+                        <label>true</label>
+                        <code>true</code>
+                        <message>true</message>
+                        <threadName>true</threadName>
+                        <dataType>true</dataType>
+                        <encoding>false</encoding>
+                        <assertions>true</assertions>
+                        <subresults>true</subresults>
+                        <responseData>false</responseData>
+                        <samplerData>false</samplerData>
+                        <xml>false</xml>
+                        <fieldNames>true</fieldNames>
+                        <responseHeaders>false</responseHeaders>
+                        <requestHeaders>false</requestHeaders>
+                        <responseDataOnError>false</responseDataOnError>
+                        <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                        <assertionsResultsToSave>0</assertionsResultsToSave>
+                        <bytes>true</bytes>
+                        <sentBytes>true</sentBytes>
+                        <url>true</url>
+                        <threadCounts>true</threadCounts>
+                        <idleTime>true</idleTime>
+                        <connectTime>true</connectTime>
+                      </value>
+                    </objProp>
+                    <stringProp name="filename">comparison_visualizer.jtl</stringProp>
+                  </ResultCollector>
                 </hashTree>
               </hashTree>
             </hashTree>
@@ -218,14 +329,10 @@ jobs:
         </jmeterTestPlan>
         EOF
 
-    
+    - name: Run JMeter Test Plan
+      run: |
+        jmeter -n -t test_plan.jmx -l result.jtl -e -o reports
 
-  # Upload Results Job
-  upload-results:
-    runs-on: ubuntu-latest
-    needs: jmeter-test  # Ensures this job runs after JMeter tests
-
-    steps:
     - name: Upload JMeter Results
       uses: actions/upload-artifact@v3
       with:
@@ -238,3 +345,4 @@ jobs:
       with:
         name: jmeter-html-reports
         path: reports
+        if-no-files-found: error
