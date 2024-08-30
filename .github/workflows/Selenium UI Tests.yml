@@ -16,8 +16,12 @@ jobs:
       with:
         node-version: '16'
 
+    - name: Change directory to FarmHand
+      run: cd FarmHand
+
     - name: Install dependencies
       run: npm install
+      working-directory: FarmHand
 
     - name: Set up ChromeDriver
       uses: nanasess/setup-chromedriver@v1
@@ -27,3 +31,4 @@ jobs:
 
     - name: Run Selenium tests
       run: node seleniumTest1.js
+      working-directory: FarmHand
