@@ -26,4 +26,4 @@ jobs:
       uses: browser-actions/setup-chrome@v1
 
     - name: Run Selenium tests
-      run: node seleniumTest1.js
+      run: node seleniumTest.js
