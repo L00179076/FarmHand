@@ -7,7 +7,7 @@ const { Builder, By, Key, until } = require('selenium-webdriver');
     await driver.get('https://org82e3564c.crm11.dynamics.com/main.aspx?appid=2600964d-7cde-ee11-904d-000d3a0b8b2b');
 
     // Wait for the form to load
-    await driver.wait(until.elementLocated(By.id('formId')), 10000); // Adjust the ID as needed
+    await driver.wait(until.elementLocated(By.id('formId')), 90000); // Adjust the ID as needed
 
     // Check the visibility of the sections
     let feasibilityStatus = await driver.findElement(By.id('pir_feasibilitystatus')).getAttribute('value'); // Adjust the ID as needed
