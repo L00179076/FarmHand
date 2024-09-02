@@ -56,6 +56,7 @@ jobs:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         allow-empty-commit: true
 
+
   # Job 2: Run Selenium Tests on Windows with Firefox
   selenium-tests:
     runs-on: windows-latest
@@ -88,6 +89,7 @@ jobs:
 
     - name: Run Selenium Tests
       run: node seleniumTest1.js
+
 
   # Job 3: Run JMeter Performance Test
   jmeter-test:
@@ -211,6 +213,7 @@ jobs:
       with:
         name: jmeter-html-report
         path: reports/html/
+
 
   # Job 4: Failure Response Test (Runs only if Selenium Tests fail)
   failure-response-test:
