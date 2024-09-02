@@ -2,7 +2,7 @@ name: Failure Response Test
 
 on:
   workflow_run:
-    workflows: ["JMeter Performance Test"]
+    workflows: ["Run Selenium Tests on Windows with Firefox"]
     types:
       - completed
 
@@ -84,5 +84,3 @@ jobs:
           </hashTree>
         </jmeterTestPlan>
         "@ | Set-Content -Path failure_response_test_plan.jmx -Force
-
-    
