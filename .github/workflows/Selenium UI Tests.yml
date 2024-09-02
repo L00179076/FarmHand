@@ -10,14 +10,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Create package.json
-      run: |
-        # Create a package.json file with necessary dependencies
-        echo {} > package.json
-        npm init -y
-        npm install selenium-webdriver chromedriver
-       
-
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
@@ -25,14 +17,12 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-      
 
-    - name: Set up ChromeDriver
-      uses: nanasess/setup-chromedriver@v1
+    - name: Set up GeckoDriver
+      uses: mozilla/geckodriver@v1.23.0
 
-    - name: Set up Chrome
-      uses: browser-actions/setup-chrome@v1
+    - name: Set up Firefox
+      uses: browser-actions/setup-firefox@v2
 
     - name: Run Selenium tests
       run: node seleniumTest1.js
-      
