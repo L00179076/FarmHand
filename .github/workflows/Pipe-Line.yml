@@ -62,6 +62,7 @@ jobs:
         
   selenium-tests:
     runs-on: windows-latest
+    needs: [export-from-dev]
 
     steps:
     - name: Checkout code
@@ -176,7 +177,7 @@ jobs:
 
   jmeter-test:
     runs-on: windows-latest
-    needs: [selenium-tests, failure-response-test]
+    needs: [failure-response-test]
 
     steps:
     # 1. Checkout the repository
@@ -308,7 +309,7 @@ jobs:
 
   deploy-to-dev:
     runs-on: windows-latest
-    needs: [export-from-dev, jmeter-test]
+    needs: [jmeter-test]
 
     steps:
     - name: Checkout Repository
