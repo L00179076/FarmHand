@@ -1,4 +1,4 @@
-name: JMeter Performance Test
+name: JMeterTest
 
 on:
   push:
@@ -10,27 +10,26 @@ jobs:
     runs-on: windows-latest
 
     steps:
+    # 1. Checkout the repository
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    # 2. Set up JDK 17
     - name: Set up JDK 17
       uses: actions/setup-java@v3
       with:
         java-version: '17'
         distribution: 'adopt'
 
-    - name: Set JMeter Path
-      run: |
-        # Define JMeter path
-        $jmeterPath = "C:\Users\TDA\Downloads\apache-jmeter-5.6.3\bin"
-        
-        # Set the environment variable for JMeter
-        [Environment]::SetEnvironmentVariable("JMETER_HOME", $jmeterPath, [System.EnvironmentVariableTarget]::Machine)
-        [Environment]::SetEnvironmentVariable("PATH", "$env:PATH;$jmeterPath", [System.EnvironmentVariableTarget]::Machine)
-        
-        # Output the path for verification
-        Write-Host "JMeter path is $jmeterPath"
+    # 3. Install JMeter using Chocolatey
+    - name: Install JMeter
+      run: choco install jmeter -y
 
+    # 4. Verify JMeter Installation
+    - name: Verify JMeter Installation
+      run: jmeter -v
+
+    # 5. Create JMeter Test Plan
     - name: Create JMeter Test Plan
       run: |
         New-Item -Path reports -ItemType Directory -Force
@@ -70,43 +69,8 @@ jobs:
                   </elementProp>
                 </HTTPSamplerProxy>
                 <hashTree>
-                  <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table">
-                    <boolProp name="ResultCollector.error_logging">false</boolProp>
-                    <objProp>
-                      <name>saveConfig</name>
-                      <value class="SampleSaveConfiguration">
-                        <time>true</time>
-                        <latency>true</latency>
-                        <timestamp>true</timestamp>
-                        <success>true</success>
-                        <label>true</label>
-                        <code>true</code>
-                        <message>true</message>
-                        <threadName>true</threadName>
-                        <dataType>true</dataType>
-                        <encoding>false</encoding>
-                        <assertions>true</assertions>
-                        <subresults>true</subresults>
-                        <responseData>false</responseData>
-                        <samplerData>false</samplerData>
-                        <xml>false</xml>
-                        <fieldNames>true</fieldNames>
-                        <responseHeaders>false</responseHeaders>
-                        <requestHeaders>false</requestHeaders>
-                        <responseDataOnError>false</responseDataOnError>
-                        <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                        <assertionsResultsToSave>0</assertionsResultsToSave>
-                        <bytes>true</bytes>
-                        <sentBytes>true</sentBytes>
-                        <url>true</url>
-                        <threadCounts>true</threadCounts>
-                        <idleTime>true</idleTime>
-                        <connectTime>true</connectTime>
-                      </value>
-                    </objProp>
-                    <stringProp name="filename">result.jtl</stringProp>
-                  </ResultCollector>
-                  <hashTree/>
+                  <!-- Add your ResultCollectors here as needed -->
+                  <!-- Example ResultCollector -->
                   <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
                     <boolProp name="ResultCollector.error_logging">false</boolProp>
                     <objProp>
@@ -144,190 +108,7 @@ jobs:
                     <stringProp name="filename">summary_report.jtl</stringProp>
                   </ResultCollector>
                   <hashTree/>
-                  <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report">
-                    <boolProp name="ResultCollector.error_logging">false</boolProp>
-                    <objProp>
-                      <name>saveConfig</name>
-                      <value class="SampleSaveConfiguration">
-                        <time>true</time>
-                        <latency>true</latency>
-                        <timestamp>true</timestamp>
-                        <success>true</success>
-                        <label>true</label>
-                        <code>true</code>
-                        <message>true</message>
-                        <threadName>true</threadName>
-                        <dataType>true</dataType>
-                        <encoding>false</encoding>
-                        <assertions>true</assertions>
-                        <subresults>true</subresults>
-                        <responseData>false</responseData>
-                        <samplerData>false</samplerData>
-                        <xml>false</xml>
-                        <fieldNames>true</fieldNames>
-                        <responseHeaders>false</responseHeaders>
-                        <requestHeaders>false</requestHeaders>
-                        <responseDataOnError>false</responseDataOnError>
-                        <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                        <assertionsResultsToSave>0</assertionsResultsToSave>
-                        <bytes>true</bytes>
-                        <sentBytes>true</sentBytes>
-                        <url>true</url>
-                        <threadCounts>true</threadCounts>
-                        <idleTime>true</idleTime>
-                        <connectTime>true</connectTime>
-                      </value>
-                    </objProp>
-                    <stringProp name="filename">aggregate_report.jtl</stringProp>
-                  </ResultCollector>
-                  <hashTree/>
-                  <ResultCollector guiclass="StatGraphVisualizer" testclass="ResultCollector" testname="Aggregate Graph">
-                    <boolProp name="ResultCollector.error_logging">false</boolProp>
-                    <objProp>
-                      <name>saveConfig</name>
-                      <value class="SampleSaveConfiguration">
-                        <time>true</time>
-                        <latency>true</latency>
-                        <timestamp>true</timestamp>
-                        <success>true</success>
-                        <label>true</label>
-                        <code>true</code>
-                        <message>true</message>
-                        <threadName>true</threadName>
-                        <dataType>true</dataType>
-                        <encoding>false</encoding>
-                        <assertions>true</assertions>
-                        <subresults>true</subresults>
-                        <responseData>false</responseData>
-                        <samplerData>false</samplerData>
-                        <xml>false</xml>
-                        <fieldNames>true</fieldNames>
-                        <responseHeaders>false</responseHeaders>
-                        <requestHeaders>false</requestHeaders>
-                        <responseDataOnError>false</responseDataOnError>
-                        <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                        <assertionsResultsToSave>0</assertionsResultsToSave>
-                        <bytes>true</bytes>
-                        <sentBytes>true</sentBytes>
-                        <url>true</url>
-                        <threadCounts>true</threadCounts>
-                        <idleTime>true</idleTime>
-                        <connectTime>true</connectTime>
-                      </value>
-                    </objProp>
-                    <stringProp name="filename">aggregate_graph.jtl</stringProp>
-                  </ResultCollector>
-                  <hashTree/>
-                  <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph">
-                    <boolProp name="ResultCollector.error_logging">false</boolProp>
-                    <objProp>
-                      <name>saveConfig</name>
-                      <value class="SampleSaveConfiguration">
-                        <time>true</time>
-                        <latency>true</latency>
-                        <timestamp>true</timestamp>
-                        <success>true</success>
-                        <label>true</label>
-                        <code>true</code>
-                        <message>true</message>
-                        <threadName>true</threadName>
-                        <dataType>true</dataType>
-                        <encoding>false</encoding>
-                        <assertions>true</assertions>
-                        <subresults>true</subresults>
-                        <responseData>false</responseData>
-                        <samplerData>false</samplerData>
-                        <xml>false</xml>
-                        <fieldNames>true</fieldNames>
-                        <responseHeaders>false</responseHeaders>
-                        <requestHeaders>false</requestHeaders>
-                        <responseDataOnError>false</responseDataOnError>
-                        <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                        <assertionsResultsToSave>0</assertionsResultsToSave>
-                        <bytes>true</bytes>
-                        <sentBytes>true</sentBytes>
-                        <url>true</url>
-                        <threadCounts>true</threadCounts>
-                        <idleTime>true</idleTime>
-                        <connectTime>true</connectTime>
-                      </value>
-                    </objProp>
-                    <stringProp name="filename">response_time_graph.jtl</stringProp>
-                  </ResultCollector>
-                  <hashTree/>
-                  <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
-                    <boolProp name="ResultCollector.error_logging">false</boolProp>
-                    <objProp>
-                      <name>saveConfig</name>
-                      <value class="SampleSaveConfiguration">
-                        <time>true</time>
-                        <latency>true</latency>
-                        <timestamp>true</timestamp>
-                        <success>true</success>
-                        <label>true</label>
-                        <code>true</code>
-                        <message>true</message>
-                        <threadName>true</threadName>
-                        <dataType>true</dataType>
-                        <encoding>false</encoding>
-                        <assertions>true</assertions>
-                        <subresults>true</subresults>
-                        <responseData>false</responseData>
-                        <samplerData>false</samplerData>
-                        <xml>false</xml>
-                        <fieldNames>true</fieldNames>
-                        <responseHeaders>false</responseHeaders>
-                        <requestHeaders>false</requestHeaders>
-                        <responseDataOnError>false</responseDataOnError>
-                        <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                        <assertionsResultsToSave>0</assertionsResultsToSave>
-                        <bytes>true</bytes>
-                        <sentBytes>true</sentBytes>
-                        <url>true</url>
-                        <threadCounts>true</threadCounts>
-                        <idleTime>true</idleTime>
-                        <connectTime>true</connectTime>
-                      </value>
-                    </objProp>
-                    <stringProp name="filename">view_results_tree.jtl</stringProp>
-                  </ResultCollector>
-                  <hashTree/>
-                  <ResultCollector guiclass="ComparisonVisualizer" testclass="ResultCollector" testname="Comparison Assertion Visualizer">
-                    <boolProp name="ResultCollector.error_logging">false</boolProp>
-                    <objProp>
-                      <name>saveConfig</name>
-                      <value class="SampleSaveConfiguration">
-                        <time>true</time>
-                        <latency>true</latency>
-                        <timestamp>true</timestamp>
-                        <success>true</success>
-                        <label>true</label>
-                        <code>true</code>
-                        <message>true</message>
-                        <threadName>true</threadName>
-                        <dataType>true</dataType>
-                        <encoding>false</encoding>
-                        <assertions>true</assertions>
-                        <subresults>true</subresults>
-                        <responseData>false</responseData>
-                        <samplerData>false</samplerData>
-                        <xml>false</xml>
-                        <fieldNames>true</fieldNames>
-                        <responseHeaders>false</responseHeaders>
-                        <requestHeaders>false</requestHeaders>
-                        <responseDataOnError>false</responseDataOnError>
-                        <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
-                        <assertionsResultsToSave>0</assertionsResultsToSave>
-                        <bytes>true</bytes>
-                        <sentBytes>true</sentBytes>
-                        <url>true</url>
-                        <threadCounts>true</threadCounts>
-                        <idleTime>true</idleTime>
-                        <connectTime>true</connectTime>
-                      </value>
-                    </objProp>
-                    <stringProp name="filename">comparison_visualizer.jtl</stringProp>
-                  </ResultCollector>
+                  <!-- Add other ResultCollectors as needed -->
                 </hashTree>
               </hashTree>
             </hashTree>
@@ -335,4 +116,21 @@ jobs:
         </jmeterTestPlan>
         "@ | Set-Content -Path test_plan.jmx -Force
 
-    
+    # 6. Run JMeter Test
+    - name: Run JMeter Test
+      run: |
+        jmeter -n -t test_plan.jmx -l reports/results.jtl -j reports/jmeter.log -e -o reports/html
+
+    # 7. Archive Test Results
+    - name: Archive Test Results
+      uses: actions/upload-artifact@v3
+      with:
+        name: jmeter-reports    
+        path: reports/
+
+    # 8. Display HTML Report
+    - name: Display HTML Report
+      uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.TOKEN }}
+          publish_dir: ./reports/html
