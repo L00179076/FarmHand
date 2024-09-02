@@ -1,37 +1,35 @@
 name: Pipeline
-
+# Export solution from DEV environment
+#  unpack it and prepare, commit and push a git branch with the changes
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 permissions:
   contents: write
 
 jobs:
-  # Job 1: Export and Branch Solution from DEV
   export-from-dev:
     runs-on: windows-latest
     env:
       RUNNER_DEBUG: 1
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
       with:
         lfs: true
 
-    - name: Who-Am-I Action
+    - name: who-am-i action
       uses: microsoft/powerplatform-actions/who-am-i@v0
       with:
         environment-url: 'https://farmhanddev.crm4.dynamics.com/'
         user-name: 'slilly@FarmhandCRM.onmicrosoft.com'
         password-secret: ${{ secrets.password }}
 
-    - name: Export Solution Action
+    - name: export-solution action
       uses: microsoft/powerplatform-actions/export-solution@v0
       with:
         environment-url: 'https://farmhanddev.crm4.dynamics.com/'
@@ -40,7 +38,8 @@ jobs:
         solution-name: BPFCustomizations
         solution-output-file: out/exported/ALMLab.zip
 
-    - name: Unpack Solution Action
+    
+    - name: unpack-solution action
       uses: microsoft/powerplatform-actions/unpack-solution@v0
       with:
         solution-file: out/exported/ALMLab.zip
@@ -48,7 +47,7 @@ jobs:
         solution-type: 'Unmanaged'
         overwrite-files: true
 
-    - name: Branch Solution and Prepare for Pull Request
+    - name: branch-solution, prepare it for a PullRequest
       uses: microsoft/powerplatform-actions/branch-solution@v0
       with:
         solution-folder: out/solutions/ALMLab
@@ -59,11 +58,11 @@ jobs:
 
   # Job 2: Run Selenium Tests on Windows with Firefox
   selenium-tests:
+
     runs-on: windows-latest
-    needs: export-from-dev
 
     steps:
-    - name: Checkout Code
+    - name: Checkout code
       uses: actions/checkout@v3
 
     - name: Set up Node.js
@@ -71,13 +70,13 @@ jobs:
       with:
         node-version: '16'
 
-    - name: Install Dependencies
+    - name: Install dependencies
       run: npm install
 
     - name: Install Firefox
       run: choco install firefox --no-progress --confirm
 
-    - name: Download and Install GeckoDriver
+    - name: Download and install GeckoDriver
       run: |
         $geckoVersion = (Invoke-RestMethod -Uri "https://api.github.com/repos/mozilla/geckodriver/releases/latest").tag_name.TrimStart('v')
         Invoke-WebRequest -Uri "https://github.com/mozilla/geckodriver/releases/download/v$geckoVersion/geckodriver-v$geckoVersion-win64.zip" -OutFile "geckodriver.zip"
@@ -87,7 +86,7 @@ jobs:
     - name: Add GeckoDriver to PATH
       run: echo "C:\tools\geckodriver" | Out-File -Append -FilePath $env:GITHUB_PATH
 
-    - name: Run Selenium Tests
+    - name: Run Selenium tests
       run: node seleniumTest1.js
 
 
