@@ -133,7 +133,5 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.TOKEN }}
-        user_name: "L00179076"
-        user_email: "L00179076@atu.ie"
         publish_dir: ./reports/html
         publish_branch: gh-pages
