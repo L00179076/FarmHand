@@ -1,0 +1,293 @@
+name: Pipeline
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  # Job 1: Export and Branch Solution from DEV
+  export-from-dev:
+    runs-on: windows-latest
+    env:
+      RUNNER_DEBUG: 1
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        lfs: true
+
+    - name: Who-Am-I Action
+      uses: microsoft/powerplatform-actions/who-am-i@v0
+      with:
+        environment-url: 'https://farmhanddev.crm4.dynamics.com/'
+        user-name: 'slilly@FarmhandCRM.onmicrosoft.com'
+        password-secret: ${{ secrets.password }}
+
+    - name: Export Solution Action
+      uses: microsoft/powerplatform-actions/export-solution@v0
+      with:
+        environment-url: 'https://farmhanddev.crm4.dynamics.com/'
+        user-name: 'slilly@FarmhandCRM.onmicrosoft.com'
+        password-secret: ${{ secrets.password }}
+        solution-name: BPFCustomizations
+        solution-output-file: out/exported/ALMLab.zip
+
+    - name: Unpack Solution Action
+      uses: microsoft/powerplatform-actions/unpack-solution@v0
+      with:
+        solution-file: out/exported/ALMLab.zip
+        solution-folder: out/solutions/ALMLab
+        solution-type: 'Unmanaged'
+        overwrite-files: true
+
+    - name: Branch Solution and Prepare for Pull Request
+      uses: microsoft/powerplatform-actions/branch-solution@v0
+      with:
+        solution-folder: out/solutions/ALMLab
+        solution-target-folder: solutions/ALMLab
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        allow-empty-commit: true
+
+  # Job 2: Run Selenium Tests on Windows with Firefox
+  selenium-tests:
+    runs-on: windows-latest
+    needs: export-from-dev
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Install Firefox
+      run: choco install firefox --no-progress --confirm
+
+    - name: Download and Install GeckoDriver
+      run: |
+        $geckoVersion = (Invoke-RestMethod -Uri "https://api.github.com/repos/mozilla/geckodriver/releases/latest").tag_name.TrimStart('v')
+        Invoke-WebRequest -Uri "https://github.com/mozilla/geckodriver/releases/download/v$geckoVersion/geckodriver-v$geckoVersion-win64.zip" -OutFile "geckodriver.zip"
+        Expand-Archive geckodriver.zip -DestinationPath "C:\tools\geckodriver"
+        $env:PATH += ";C:\tools\geckodriver"
+
+    - name: Add GeckoDriver to PATH
+      run: echo "C:\tools\geckodriver" | Out-File -Append -FilePath $env:GITHUB_PATH
+
+    - name: Run Selenium Tests
+      run: node seleniumTest1.js
+
+  # Job 3: Run JMeter Performance Test
+  jmeter-test:
+    runs-on: windows-latest
+    needs: selenium-tests
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'adopt'
+
+    - name: Install JMeter
+      run: choco install jmeter -y
+
+    - name: Verify JMeter Installation
+      run: jmeter -v
+
+    - name: Create JMeter Test Plan
+      run: |
+        New-Item -Path reports -ItemType Directory -Force
+        @"
+        <?xml version="1.0" encoding="UTF-8"?>
+        <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+          <hashTree>
+            <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="test_plan_powerapps">
+              <boolProp name="TestPlan.functional_mode">true</boolProp>
+              <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
+              <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+              <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+            </TestPlan>
+            <hashTree>
+              <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Users">
+                <intProp name="ThreadGroup.num_threads">100</intProp>
+                <intProp name="ThreadGroup.ramp_time">10</intProp>
+                <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
+                <stringProp name="ThreadGroup.on_sample_error">stoptest</stringProp>
+                <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+                  <stringProp name="LoopController.loops">1</stringProp>
+                  <boolProp name="LoopController.continue_forever">false</boolProp>
+                </elementProp>
+              </ThreadGroup>
+              <hashTree>
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request">
+                  <stringProp name="HTTPSampler.domain">farmhanddev.crm4.dynamics.com</stringProp>
+                  <stringProp name="HTTPSampler.path">/main.aspx?appid=2d6211aa-bb7b-4184-9f49-e27234313d5a</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <stringProp name="HTTPSampler.method">GET</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+                    <collectionProp name="Arguments.arguments"/>
+                  </elementProp>
+                </HTTPSamplerProxy>
+                <hashTree>
+                  <!-- Add your ResultCollectors here as needed -->
+                  <!-- Example ResultCollector -->
+                  <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
+                    <boolProp name="ResultCollector.error_logging">false</boolProp>
+                    <objProp>
+                      <name>saveConfig</name>
+                      <value class="SampleSaveConfiguration">
+                        <time>true</time>
+                        <latency>true</latency>
+                        <timestamp>true</timestamp>
+                        <success>true</success>
+                        <label>true</label>
+                        <code>true</code>
+                        <message>true</message>
+                        <threadName>true</threadName>
+                        <dataType>true</dataType>
+                        <encoding>false</encoding>
+                        <assertions>true</assertions>
+                        <subresults>true</subresults>
+                        <responseData>false</responseData>
+                        <samplerData>false</samplerData>
+                        <xml>false</xml>
+                        <fieldNames>true</fieldNames>
+                        <responseHeaders>false</responseHeaders>
+                        <requestHeaders>false</requestHeaders>
+                        <responseDataOnError>false</responseDataOnError>
+                        <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                        <assertionsResultsToSave>0</assertionsResultsToSave>
+                        <bytes>true</bytes>
+                        <sentBytes>true</sentBytes>
+                        <url>true</url>
+                        <threadCounts>true</threadCounts>
+                        <idleTime>true</idleTime>
+                        <connectTime>true</connectTime>
+                      </value>
+                    </objProp>
+                    <stringProp name="filename">summary_report.jtl</stringProp>
+                  </ResultCollector>
+                  <hashTree/>
+                  <!-- Add other ResultCollectors as needed -->
+                </hashTree>
+              </hashTree>
+            </hashTree>
+          </hashTree>
+        </jmeterTestPlan>
+        "@ | Set-Content -Path test_plan.jmx -Force
+
+    - name: Run JMeter Test
+      run: |
+        jmeter -n -t test_plan.jmx -l reports/results.jtl -j reports/jmeter.log -e -o reports/html
+
+    - name: Archive Test Results
+      uses: actions/upload-artifact@v3
+      with:
+        name: jmeter-reports    
+        path: reports/
+
+    - name: Upload HTML Report as an Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: jmeter-html-report
+        path: reports/html/
+
+  # Job 4: Failure Response Test (Runs only if Selenium Tests fail)
+  failure-response-test:
+    runs-on: windows-latest
+    needs: selenium-tests
+    if: ${{ failure() }}
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'adopt'
+
+    - name: Set JMeter Path
+      run: |
+        $jmeterPath = "C:\Users\TDA\Downloads\apache-jmeter-5.6.3\bin"
+        [Environment]::SetEnvironmentVariable("JMETER_HOME", $jmeterPath, [System.EnvironmentVariableTarget]::Machine)
+        [Environment]::SetEnvironmentVariable("PATH", "$env:PATH;$jmeterPath", [System.EnvironmentVariableTarget]::Machine)
+        Write-Host "JMeter path is $jmeterPath"
+
+    - name: Create Failure Response Test Plan
+      run: |
+        New-Item -Path failure_response_reports -ItemType Directory -Force
+        @"
+        <?xml version="1.0" encoding="UTF-8"?>
+        <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+          <hashTree>
+            <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Failure Response Test Plan">
+              <boolProp name="TestPlan.functional_mode">true</boolProp>
+              <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
+              <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+            </TestPlan>
+            <hashTree>
+              <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group">
+                <stringProp name="ThreadGroup.num_threads">50</stringProp>
+                <stringProp name="ThreadGroup.ramp_time">5</stringProp>
+                <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+                  <stringProp name="LoopController.loops">5</stringProp>
+                </elementProp>
+              </ThreadGroup>
+              <hashTree>
+                <!-- Simulate failure -->
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Simulate Failure">
+                  <stringProp name="HTTPSampler.domain">example.com</stringProp>
+                  <stringProp name="HTTPSampler.path">/simulate-failure</stringProp>
+                  <stringProp name="HTTPSampler.method">GET</stringProp>
+                </HTTPSamplerProxy>
+                <hashTree>
+                  <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Check Failure Response">
+                    <stringProp name="ResponseAssertion.test_field">Response Code</stringProp>
+                    <stringProp name="ResponseAssertion.assertion_type">2</stringProp>
+                    <collectionProp name="ResponseAssertion.field_to_check">
+                      <stringProp name="404">404</stringProp>
+                    </collectionProp>
+                  </ResponseAssertion>
+                </hashTree>
+                <!-- Check continued functionality -->
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Check Functionality">
+                  <stringProp name="HTTPSampler.domain">example.com</stringProp>
+                  <stringProp name="HTTPSampler.path">/check-functionality</stringProp>
+                  <stringProp name="HTTPSampler.method">GET</stringProp>
+                </HTTPSamplerProxy>
+                <hashTree>
+                  <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Check Functionality Response">
+                    <stringProp name="ResponseAssertion.test_field">Response Code</stringProp>
+                    <stringProp name="ResponseAssertion.assertion_type">1</stringProp>
+                    <collectionProp name="ResponseAssertion.field_to_check">
+                      <stringProp name="200">200</stringProp>
+                    </collectionProp>
+                  </ResponseAssertion>
+                </hashTree>
+              </hashTree>
+            </hashTree>
+          </hashTree>
+        </jmeterTestPlan>
+        "@ | Set-Content -Path failure_response_test_plan.jmx -Force
