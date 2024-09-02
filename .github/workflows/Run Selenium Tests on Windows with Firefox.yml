@@ -27,11 +27,16 @@ jobs:
     - name: Install Firefox
       run: choco install firefox --no-progress --confirm
 
-    - name: Install GeckoDriver
-      run: choco install geckodriver --no-progress --confirm
+    - name: Download and install GeckoDriver
+      run: |
+        $geckoVersion = (Invoke-WebRequest -Uri "https://github.com/mozilla/geckodriver/releases/latest" -UseBasicParsing).Content -match '(?<=/mozilla/geckodriver/releases/download/v)([0-9.]+)' | Out-Null
+        $geckoVersion = $Matches[0]
+        Invoke-WebRequest -Uri "https://github.com/mozilla/geckodriver/releases/download/v$geckoVersion/geckodriver-v$geckoVersion-win64.zip" -OutFile "geckodriver.zip"
+        Expand-Archive geckodriver.zip -DestinationPath "C:\tools\geckodriver"
+        $env:PATH += ";C:\tools\geckodriver"
 
     - name: Add GeckoDriver to PATH
-      run: echo "C:\Program Files\geckodriver" | Out-File -Append -FilePath $env:GITHUB_PATH
+      run: echo "C:\tools\geckodriver" | Out-File -Append -FilePath $env:GITHUB_PATH
 
     - name: Run Selenium tests
       run: node seleniumTest1.js
