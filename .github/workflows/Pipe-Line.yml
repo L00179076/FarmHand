@@ -176,6 +176,7 @@ jobs:
 
   jmeter-test:
     runs-on: windows-latest
+    needs: [selenium-tests, failure-response-test]
 
     steps:
     # 1. Checkout the repository
