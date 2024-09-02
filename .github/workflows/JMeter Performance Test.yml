@@ -128,4 +128,11 @@ jobs:
         name: jmeter-reports    
         path: reports/
 
+    # 8. Upload HTML Report as an Artifact
+    - name: Upload HTML Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: jmeter-html-report
+        path: reports/html/
+
     
