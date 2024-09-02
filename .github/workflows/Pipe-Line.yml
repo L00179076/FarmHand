@@ -21,18 +21,18 @@ jobs:
       RUNNER_DEBUG: 1
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
       with:
         lfs: true
 
-    - name: Who-Am-I Action
+    - name: who-am-i action
       uses: microsoft/powerplatform-actions/who-am-i@v0
       with:
         environment-url: 'https://farmhanddev.crm4.dynamics.com/'
         user-name: 'slilly@FarmhandCRM.onmicrosoft.com'
         password-secret: ${{ secrets.password }}
 
-    - name: Export Solution Action
+    - name: export-solution action
       uses: microsoft/powerplatform-actions/export-solution@v0
       with:
         environment-url: 'https://farmhanddev.crm4.dynamics.com/'
@@ -41,7 +41,8 @@ jobs:
         solution-name: BPFCustomizations
         solution-output-file: out/exported/ALMLab.zip
 
-    - name: Unpack Solution Action
+    
+    - name: unpack-solution action
       uses: microsoft/powerplatform-actions/unpack-solution@v0
       with:
         solution-file: out/exported/ALMLab.zip
@@ -49,7 +50,7 @@ jobs:
         solution-type: 'Unmanaged'
         overwrite-files: true
 
-    - name: Branch Solution and Prepare for Pull Request
+    - name: branch-solution, prepare it for a PullRequest
       uses: microsoft/powerplatform-actions/branch-solution@v0
       with:
         solution-folder: out/solutions/ALMLab
@@ -57,12 +58,13 @@ jobs:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         allow-empty-commit: true
 
+
+        
   selenium-tests:
     runs-on: windows-latest
-    needs: export-from-dev
 
     steps:
-    - name: Checkout Code
+    - name: Checkout code
       uses: actions/checkout@v3
 
     - name: Set up Node.js
@@ -70,13 +72,13 @@ jobs:
       with:
         node-version: '16'
 
-    - name: Install Dependencies
+    - name: Install dependencies
       run: npm install
 
     - name: Install Firefox
       run: choco install firefox --no-progress --confirm
 
-    - name: Download and Install GeckoDriver
+    - name: Download and install GeckoDriver
       run: |
         $geckoVersion = (Invoke-RestMethod -Uri "https://api.github.com/repos/mozilla/geckodriver/releases/latest").tag_name.TrimStart('v')
         Invoke-WebRequest -Uri "https://github.com/mozilla/geckodriver/releases/download/v$geckoVersion/geckodriver-v$geckoVersion-win64.zip" -OutFile "geckodriver.zip"
@@ -86,8 +88,10 @@ jobs:
     - name: Add GeckoDriver to PATH
       run: echo "C:\tools\geckodriver" | Out-File -Append -FilePath $env:GITHUB_PATH
 
-    - name: Run Selenium Tests
+    - name: Run Selenium tests
       run: node seleniumTest1.js
+
+      
 
   failure-response-test:
     runs-on: windows-latest
@@ -168,26 +172,32 @@ jobs:
         </jmeterTestPlan>
         "@ | Set-Content -Path failure_response_test_plan.jmx -Force
 
+
+
   jmeter-test:
     runs-on: windows-latest
-    needs: selenium-tests
 
     steps:
-    - name: Checkout Repository
+    # 1. Checkout the repository
+    - name: Checkout repository
       uses: actions/checkout@v3
 
+    # 2. Set up JDK 17
     - name: Set up JDK 17
       uses: actions/setup-java@v3
       with:
         java-version: '17'
         distribution: 'adopt'
 
+    # 3. Install JMeter using Chocolatey
     - name: Install JMeter
       run: choco install jmeter -y
 
+    # 4. Verify JMeter Installation
     - name: Verify JMeter Installation
       run: jmeter -v
 
+    # 5. Create JMeter Test Plan
     - name: Create JMeter Test Plan
       run: |
         New-Item -Path reports -ItemType Directory -Force
@@ -274,21 +284,26 @@ jobs:
         </jmeterTestPlan>
         "@ | Set-Content -Path test_plan.jmx -Force
 
+    # 6. Run JMeter Test
     - name: Run JMeter Test
       run: |
         jmeter -n -t test_plan.jmx -l reports/results.jtl -j reports/jmeter.log -e -o reports/html
 
+    # 7. Archive Test Results
     - name: Archive Test Results
       uses: actions/upload-artifact@v3
       with:
         name: jmeter-reports    
         path: reports/
 
-    - name: Upload HTML Report as an Artifact
+    # 8. Upload HTML Report as an Artifact
+    - name: Upload HTML Report
       uses: actions/upload-artifact@v3
       with:
         name: jmeter-html-report
         path: reports/html/
+
+
 
   deploy-to-dev:
     runs-on: windows-latest
