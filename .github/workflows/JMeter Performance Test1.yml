@@ -23,7 +23,7 @@ jobs:
 
     # 3. Install JMeter using Chocolatey
     - name: Install JMeter
-      run: choco install jmeter --version=5.6.3 -y
+      run: choco install jmeter -y
 
     # 4. Verify JMeter Installation
     - name: Verify JMeter Installation
