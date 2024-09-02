@@ -3,7 +3,7 @@ name: JMeter Performance Test
 on:
   push:
     branches:
-      - main  # Change this to your branch if necessary
+      - main  
 
 jobs:
   jmeter-test:
@@ -335,4 +335,19 @@ jobs:
         </jmeterTestPlan>
         "@ | Set-Content -Path test_plan.jmx -Force
 
-  
+    - name: Run JMeter Test
+      run: |
+        # Run the JMeter test
+        jmeter -n -t test_plan.jmx -l reports/results.jtl -j reports/jmeter.log -e -o reports/html
+
+    - name: Archive Test Results
+      uses: actions/upload-artifact@v3
+      with:
+        name: jmeter-reports
+        path: reports/
+
+    - name: Display HTML Report
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./reports/html
