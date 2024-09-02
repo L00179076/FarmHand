@@ -1,7 +1,8 @@
 name: Pipe-Line
 # Export solution from DEV environment
-# unpack it and prepare, commit and push a git branch with the changes
-# Then, run Selenium tests on Windows with Firefox
+# Unpack it, commit and push a git branch with the changes
+# Run Selenium tests, perform a failure response test if the Selenium tests fail,
+# run a JMeter performance test, and finally deploy the solution to another environment.
 
 on:
   workflow_dispatch:
@@ -88,8 +89,6 @@ jobs:
     - name: Run Selenium Tests
       run: node seleniumTest1.js
 
-
-
   failure-response-test:
     runs-on: windows-latest
     needs: selenium-tests
@@ -168,9 +167,6 @@ jobs:
           </hashTree>
         </jmeterTestPlan>
         "@ | Set-Content -Path failure_response_test_plan.jmx -Force
-
-
-        
 
   jmeter-test:
     runs-on: windows-latest
@@ -293,3 +289,19 @@ jobs:
       with:
         name: jmeter-html-report
         path: reports/html/
+
+  deploy-to-dev:
+    runs-on: windows-latest
+    needs: [export-from-dev, selenium-tests, failure-response-test, jmeter-test]
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Deploy Solution to Target Environment
+      uses: microsoft/powerplatform-actions/import-solution@v0
+      with:
+        environment-url: 'https://org82e3564c.crm11.dynamics.com/'
+        user-name: 'Riya.Devikar@tdau.net'
+        password-secret: ${{ secrets.password1 }}
+        solution-input-file: out/exported/ALMLab.zip
