@@ -40,7 +40,6 @@ jobs:
         solution-output-file: out/exported/ALMLab.zip
 
     
-
     - name: unpack-solution action
       uses: microsoft/powerplatform-actions/unpack-solution@v0
       with:
