@@ -125,7 +125,7 @@ jobs:
     - name: Archive Test Results
       uses: actions/upload-artifact@v3
       with:
-        name: jmeter-reports
+        name: jmeter-reports    
         path: reports/
 
     # 8. Display HTML Report
