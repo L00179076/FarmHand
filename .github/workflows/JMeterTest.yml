@@ -1,4 +1,4 @@
-name: JMeter Performance Test1
+name: JMeterTest
 
 on:
   push:
