@@ -335,19 +335,4 @@ jobs:
         </jmeterTestPlan>
         "@ | Set-Content -Path test_plan.jmx -Force
 
-    - name: Run JMeter Test
-      run: |
-        # Run the JMeter test using the full path
-        & "$env:JMETER_HOME\\jmeter.bat" -n -t test_plan.jmx -l reports/results.jtl -j reports/jmeter.log -e -o reports/html
-
-    - name: Archive Test Results
-      uses: actions/upload-artifact@v3
-      with:
-        name: jmeter-reports
-        path: reports/
-
-    - name: Display HTML Report
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./reports/html
+    
