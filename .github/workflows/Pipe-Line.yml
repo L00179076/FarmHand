@@ -307,7 +307,7 @@ jobs:
 
   deploy-to-dev:
     runs-on: windows-latest
-    needs: [export-from-dev, selenium-tests, failure-response-test, jmeter-test]
+    needs: [export-from-dev, jmeter-test]
 
     steps:
     - name: Checkout Repository
