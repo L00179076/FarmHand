@@ -1,0 +1,23 @@
+{
+  "name": "selenium-test",
+  "version": "1.0.0",
+  "description": "test for selenium",
+  "main": "seleniumTest1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/L00179076/POWERAPPSPRO.git"
+  },
+  "author": "Riya Devikar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/L00179076/POWERAPPSPRO/issues"
+  },
+  "homepage": "https://github.com/L00179076/POWERAPPSPRO#readme",
+  "keywords": [],
+  "dependencies": {
+    "selenium-webdriver": "^4.24.0"
+  }
+}
