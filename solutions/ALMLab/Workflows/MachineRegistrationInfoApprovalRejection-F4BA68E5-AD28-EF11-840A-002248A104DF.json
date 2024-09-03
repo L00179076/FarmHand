@@ -1,0 +1,591 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "bpf_sharedcommondataserviceforapps_6dfad"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_approvals": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "bpf_sharedapprovals_6ba93"
+        },
+        "api": {
+          "name": "shared_approvals"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "ApprovalEmailSender (bpf_ApprovalEmailSender)": {
+          "defaultValue": "slilly@farmhandcrm.onmicrosoft.com",
+          "type": "String",
+          "metadata": {
+            "schemaName": "bpf_ApprovalEmailSender"
+          }
+        }
+      },
+      "triggers": {
+        "When_Machine_Registration_Info_is_created": {
+          "metadata": {
+            "operationMetadataId": "55392a8b-903e-45a2-b31b-c08dd47e222d"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 1,
+              "subscriptionRequest/entityname": "bpf_machineregistrationinfo",
+              "subscriptionRequest/scope": 4
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Try": {
+          "actions": {
+            "GetSerialNo": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "322fe6f7-505a-4b2d-abde-5d978a31bd4e"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "GetItem",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "new_serialnos",
+                  "recordId": "@triggerOutputs()?['body/_bpf_serialnoid_value']"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Set_SerialNo": {
+              "runAfter": {
+                "GetSerialNo": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "070473f9-c770-4b96-a868-a4998f946905"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "SerialNo",
+                "value": "@outputs('GetSerialNo')?['body/new_name']"
+              }
+            },
+            "If_Dealer_Exists": {
+              "actions": {
+                "GetDealer": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "6fd9d14b-98d6-4918-b775-b688b32f1a41"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "GetItem",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "entityName": "accounts",
+                      "recordId": "@outputs('GetSerialNo')?['body/_cdss_dealerid_value']"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                },
+                "Set_Dealer_Name": {
+                  "runAfter": {
+                    "GetDealer": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "cd1cea80-9e55-4d0c-990a-1016baa42109"
+                  },
+                  "type": "SetVariable",
+                  "inputs": {
+                    "name": "DealerName",
+                    "value": "@outputs('GetDealer')?['body/name']"
+                  }
+                },
+                "If_End_User_Exists": {
+                  "actions": {
+                    "GetEndUser": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "8607dff5-9b8e-4cfd-af4b-4c622e1a0050"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_commondataserviceforapps",
+                          "operationId": "GetItem",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                        },
+                        "parameters": {
+                          "entityName": "contacts",
+                          "recordId": "@outputs('GetSerialNo')?['body/_bpf_endusercontact_value']"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    },
+                    "Set_EndUser": {
+                      "runAfter": {
+                        "GetEndUser": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "86c96ecc-6c32-4d65-a97c-2a83809cf976"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "EndUser",
+                        "value": "@outputs('GetEndUser')?['body/fullname']"
+                      }
+                    }
+                  },
+                  "runAfter": {
+                    "Check_If_SalesRep_has_Manager": [
+                      "Succeeded"
+                    ]
+                  },
+                  "expression": {
+                    "not": {
+                      "equals": [
+                        "@outputs('GetSerialNo')?['body/_bpf_endusercontact_value']",
+                        "@null"
+                      ]
+                    }
+                  },
+                  "metadata": {
+                    "operationMetadataId": "e0795458-1fda-4e16-b12a-968ae78c260b"
+                  },
+                  "type": "If"
+                },
+                "If_HandOverCompleted_=_Yes": {
+                  "actions": {
+                    "Set_HandOverCompleted_Yes": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "51812f48-e29c-4bac-871d-aa1d2a281d4c"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "HandOverCompleted",
+                        "value": "Yes"
+                      }
+                    }
+                  },
+                  "runAfter": {
+                    "If_End_User_Exists": [
+                      "Succeeded"
+                    ]
+                  },
+                  "else": {
+                    "actions": {
+                      "Set_HandOverCompleted_No": {
+                        "runAfter": {},
+                        "metadata": {
+                          "operationMetadataId": "feaf4f83-703a-48bf-8421-4d6f66be7dfa"
+                        },
+                        "type": "SetVariable",
+                        "inputs": {
+                          "name": "HandOverCompleted",
+                          "value": "No"
+                        }
+                      }
+                    }
+                  },
+                  "expression": {
+                    "equals": [
+                      "@triggerOutputs()?['body/bpf_handovercompleted']",
+                      "@true"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "63677450-9509-4517-9ca9-d641b5e6c8c6"
+                  },
+                  "type": "If"
+                },
+                "If_PDI_Uploaded_=_Yes": {
+                  "actions": {
+                    "Set_PDIUploaded_Yes": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "65543a4a-97ad-4ec1-ba38-321459847a05"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "PDIUploaded",
+                        "value": "Yes"
+                      }
+                    }
+                  },
+                  "runAfter": {
+                    "If_HandOverCompleted_=_Yes": [
+                      "Succeeded"
+                    ]
+                  },
+                  "else": {
+                    "actions": {
+                      "Set_PDIUploaded_No": {
+                        "runAfter": {},
+                        "metadata": {
+                          "operationMetadataId": "8266a52c-5cff-4965-89d4-0e5daef492b4"
+                        },
+                        "type": "SetVariable",
+                        "inputs": {
+                          "name": "PDIUploaded",
+                          "value": "No"
+                        }
+                      }
+                    }
+                  },
+                  "expression": {
+                    "equals": [
+                      "@triggerOutputs()?['body/bpf_pdiuploaded']",
+                      "@true"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "5133b27a-a464-412f-98d2-2b8c70286f06"
+                  },
+                  "type": "If"
+                },
+                "Start_and_wait_for_an_approval": {
+                  "runAfter": {
+                    "If_PDI_Uploaded_=_Yes": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "e824ae36-dad7-4f47-9206-dbd650b06fd7"
+                  },
+                  "type": "OpenApiConnectionWebhook",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_approvals",
+                      "operationId": "StartAndWaitForAnApproval",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_approvals"
+                    },
+                    "parameters": {
+                      "approvalType": "BasicAwaitAll",
+                      "WebhookApprovalCreationInput/title": "Request for Machine Registration Approval",
+                      "WebhookApprovalCreationInput/assignedTo": "@{outputs('GetManagerDetails')?['body/internalemailaddress']};",
+                      "WebhookApprovalCreationInput/details": "Dear @{outputs('GetManagerDetails')?['body/fullname']},\nA new machine registration request has been created and is awaiting for your approval. To facilitate approval please read the details below.\nSearial No. : @{variables('SerialNo')}\nDealer: @{variables('DealerName')}\nEnd User: @{variables('EndUser')}\nExtended Warranty: @{triggerOutputs()?['body/_bpf_extendedwarranty_label']}\nHandover Completed: @{variables('HandOverCompleted')}\nPDI Uploaded: @{variables('PDIUploaded')}\n",
+                      "WebhookApprovalCreationInput/requestor": "@{parameters('ApprovalEmailSender (bpf_ApprovalEmailSender)')};",
+                      "WebhookApprovalCreationInput/enableNotifications": true,
+                      "WebhookApprovalCreationInput/enableReassignment": true
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                },
+                "Check_Response": {
+                  "foreach": "@outputs('Start_and_wait_for_an_approval')?['body/responses']",
+                  "actions": {
+                    "If_Approved": {
+                      "actions": {
+                        "Set_Approve_Machine_Registration_Info": {
+                          "runAfter": {},
+                          "metadata": {
+                            "operationMetadataId": "dcfc9761-c7b8-45eb-baf5-503cd5890281"
+                          },
+                          "type": "OpenApiConnection",
+                          "inputs": {
+                            "host": {
+                              "connectionName": "shared_commondataserviceforapps",
+                              "operationId": "UpdateRecord",
+                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                            },
+                            "parameters": {
+                              "entityName": "bpf_machineregistrationinfos",
+                              "recordId": "@triggerOutputs()?['body/bpf_machineregistrationinfoid']",
+                              "item/bpf_approved": true
+                            },
+                            "authentication": "@parameters('$authentication')"
+                          }
+                        }
+                      },
+                      "runAfter": {},
+                      "expression": {
+                        "equals": [
+                          "@items('Check_Response')?['approverResponse']",
+                          "Approve"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "a01c627d-99d2-4151-a148-58f0f6bd3106"
+                      },
+                      "type": "If"
+                    },
+                    "If_Rejected": {
+                      "actions": {},
+                      "runAfter": {
+                        "If_Approved": [
+                          "Succeeded"
+                        ]
+                      },
+                      "expression": {
+                        "equals": [
+                          "@items('Check_Response')?['approverResponse']",
+                          "Reject"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "a5b97e56-c5b4-4322-9ece-e01b49c63f28"
+                      },
+                      "type": "If"
+                    }
+                  },
+                  "runAfter": {
+                    "Start_and_wait_for_an_approval": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "16f2af35-43ab-4022-824e-0d7d36611fdc"
+                  },
+                  "type": "Foreach"
+                },
+                "GetSalesRep": {
+                  "runAfter": {
+                    "Set_Dealer_Name": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "eb5c1ed5-80fd-46df-b5d1-d1bc1362aa1e"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "GetItem",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "entityName": "systemusers",
+                      "recordId": "@outputs('GetDealer')?['body/_ownerid_value']"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                },
+                "Check_If_SalesRep_has_Manager": {
+                  "actions": {
+                    "GetManagerDetails": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "3122b06f-50c1-4e5c-82bf-cf3e61db41a0"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_commondataserviceforapps",
+                          "operationId": "GetItem",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                        },
+                        "parameters": {
+                          "entityName": "systemusers",
+                          "recordId": "@outputs('GetSalesRep')?['body/_parentsystemuserid_value']"
+                        },
+                        "authentication": "@parameters('$authentication')"
+                      }
+                    }
+                  },
+                  "runAfter": {
+                    "GetSalesRep": [
+                      "Succeeded"
+                    ]
+                  },
+                  "expression": {
+                    "not": {
+                      "equals": [
+                        "@outputs('GetSalesRep')?['body/_parentsystemuserid_value']",
+                        "@null"
+                      ]
+                    }
+                  },
+                  "metadata": {
+                    "operationMetadataId": "cb20e19b-9fdd-461a-8664-26b1d692b38e"
+                  },
+                  "type": "If"
+                }
+              },
+              "runAfter": {
+                "Set_SerialNo": [
+                  "Succeeded"
+                ]
+              },
+              "expression": {
+                "not": {
+                  "equals": [
+                    "@outputs('GetSerialNo')?['body/_cdss_dealerid_value']",
+                    "@null"
+                  ]
+                }
+              },
+              "metadata": {
+                "operationMetadataId": "a7c5f50f-2a02-4acc-9ebc-a449bc9ae634"
+              },
+              "type": "If"
+            }
+          },
+          "runAfter": {
+            "Initialize_PDIUploaded": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "09b658b4-5d39-4764-a704-8e94967fdb6d"
+          },
+          "type": "Scope"
+        },
+        "Initialize_SerialNo": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "795c5f47-dd05-4bc2-a657-170ec9dd9264"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "SerialNo",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "Initialize_DealerName": {
+          "runAfter": {
+            "Initialize_SerialNo": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "ca4133f7-7ec7-48b0-b18e-df3ebf530505"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "DealerName",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "Initialize_EndUser": {
+          "runAfter": {
+            "Initialize_DealerName": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "9853df6f-6beb-426c-b28d-273bc2602dc5"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "EndUser",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "Initialize_HandOverCompleted": {
+          "runAfter": {
+            "Initialize_EndUser": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "9708b62f-9573-444a-bafb-bb402d35409f"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "HandOverCompleted",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "Initialize_PDIUploaded": {
+          "runAfter": {
+            "Initialize_HandOverCompleted": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "283f5e64-4106-442e-b742-158cb5156374"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "PDIUploaded",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "Catch": {
+          "actions": {
+            "Terminate": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "725688cb-eb24-4078-9160-8675676ab78b"
+              },
+              "type": "Terminate",
+              "inputs": {
+                "runStatus": "Succeeded"
+              }
+            }
+          },
+          "runAfter": {
+            "Try": [
+              "Failed",
+              "Skipped",
+              "TimedOut"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "f004b049-81f4-408d-8a57-646ae248fdad"
+          },
+          "type": "Scope"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

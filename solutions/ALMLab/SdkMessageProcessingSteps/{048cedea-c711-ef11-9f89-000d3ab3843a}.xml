@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SdkMessageProcessingStep Name="Farmhand.Plugins.PostUpdateAsync_MachineRegistrationInfo: Update of bpf_machineregistrationinfo" SdkMessageProcessingStepId="{048cedea-c711-ef11-9f89-000d3ab3843a}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SdkMessageId>20bebb1b-ea3e-db11-86a7-000a3a5473e8</SdkMessageId>
+  <PluginTypeName>Farmhand.Plugins.PostUpdateAsync_MachineRegistrationInfo, Farmhand.Plugins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a1d5b124d95c7f2c</PluginTypeName>
+  <PluginTypeId>a9e99aac-d874-4a68-a346-3dfb7038eb83</PluginTypeId>
+  <PrimaryEntity>bpf_machineregistrationinfo</PrimaryEntity>
+  <AsyncAutoDelete>0</AsyncAutoDelete>
+  <Description>Farmhand.Plugins.PostUpdateAsync_MachineRegistrationInfo: Update of bpf_machineregistrationinfo</Description>
+  <FilteringAttributes>bpf_approved,bpf_serialnoid</FilteringAttributes>
+  <InvocationSource>1</InvocationSource>
+  <Mode>0</Mode>
+  <Rank>1</Rank>
+  <EventHandlerTypeCode>4602</EventHandlerTypeCode>
+  <Stage>40</Stage>
+  <IsCustomizable>1</IsCustomizable>
+  <IsHidden>0</IsHidden>
+  <SupportedDeployment>0</SupportedDeployment>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <SdkMessageProcessingStepImages>
+    <SdkMessageProcessingStepImage Name="PostImage">
+      <SdkMessageProcessingStepImageId>{dd67342a-0427-ef11-840a-000d3ab95c4b}</SdkMessageProcessingStepImageId>
+      <Attributes></Attributes>
+      <EntityAlias>PostImage</EntityAlias>
+      <ImageType>1</ImageType>
+      <MessagePropertyName>Target</MessagePropertyName>
+      <IsCustomizable>1</IsCustomizable>
+    </SdkMessageProcessingStepImage>
+  </SdkMessageProcessingStepImages>
+</SdkMessageProcessingStep>

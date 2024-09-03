@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{9c2eca1b-2a56-e511-80e7-3863bb3c33b0}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="new_name" select="1" preview="1" icon="1">
+        <row name="result" id="new_serialnoid">
+          <cell name="new_meridianproductcode" width="125" />
+          <cell name="new_name" width="150" />
+          <cell name="cdss_addressline1" width="100" />
+          <cell name="cdss_city" width="100" />
+          <cell name="cdss_county" width="100" />
+          <cell name="new_requireddepot" width="100" />
+          <cell name="new_acreage" width="75" />
+          <cell name="new_balecount" width="75" />
+          <cell name="new_noofloads" width="75" />
+          <cell name="cdss_requiresmove" width="75" />
+          <cell name="new_shippingpriority" width="75" />
+          <cell name="new_meridianproductcodeastext" width="100" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+        <entity name="new_serialno">
+          <attribute name="new_name" />
+          <attribute name="new_shippingpriority" />
+          <attribute name="cdss_requiresmove" />
+          <attribute name="new_noofloads" />
+          <attribute name="new_meridianproductcode" />
+          <attribute name="new_balecount" />
+          <attribute name="new_acreage" />
+          <order attribute="new_name" descending="false" />
+          <filter type="and">
+            <condition attribute="cdss_demomachine" operator="eq" value="1" />
+          </filter>
+          <attribute name="new_requireddepot" />
+          <attribute name="cdss_county" />
+          <attribute name="cdss_city" />
+          <attribute name="cdss_addressline1" />
+          <attribute name="new_meridianproductcodeastext" />
+          <attribute name="new_serialnoid" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="06. Demo Machines" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SdkMessageProcessingStep Name="Farmhand.Plugins.PostUpdateSync_ServiceJob: Update of new_servicejob" SdkMessageProcessingStepId="{2cb6c078-f726-ef11-840a-002248a104df}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SdkMessageId>20bebb1b-ea3e-db11-86a7-000a3a5473e8</SdkMessageId>
+  <PluginTypeName>Farmhand.Plugins.PostUpdateSync_ServiceJob, Farmhand.Plugins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a1d5b124d95c7f2c</PluginTypeName>
+  <PluginTypeId>b4b57e0b-3526-4ba7-97f6-85a1adaffbfd</PluginTypeId>
+  <PrimaryEntity>new_servicejob</PrimaryEntity>
+  <AsyncAutoDelete>0</AsyncAutoDelete>
+  <Description>Farmhand.Plugins.PostUpdateSync_ServiceJob: Update of new_servicejob</Description>
+  <FilteringAttributes>new_meridianproductcodeid,bpf_product</FilteringAttributes>
+  <InvocationSource>1</InvocationSource>
+  <Mode>0</Mode>
+  <Rank>1</Rank>
+  <EventHandlerTypeCode>4602</EventHandlerTypeCode>
+  <Stage>40</Stage>
+  <IsCustomizable>1</IsCustomizable>
+  <IsHidden>0</IsHidden>
+  <SupportedDeployment>0</SupportedDeployment>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <SdkMessageProcessingStepImages />
+</SdkMessageProcessingStep>

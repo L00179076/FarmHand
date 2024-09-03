@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{54fbf236-c26f-e311-a837-e83935b0bf0e}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="new_name" select="1" icon="1" preview="1">
+        <row name="result" id="new_serialnoid">
+          <cell name="cdss_machinestatus" width="100" />
+          <cell name="new_name" width="100" />
+          <cell name="new_meridianproductcode" width="125" />
+          <cell name="cdss_dealerid" width="100" />
+          <cell name="a_e126c2c0574ae51180d83863bb3c33b0.cdss_mobileno" width="100" disableSorting="1" />
+          <cell name="new_depotid" width="50" />
+          <cell name="a_e126c2c0574ae51180d83863bb3c33b0.address2_city" width="100" disableSorting="1" />
+          <cell name="a_e126c2c0574ae51180d83863bb3c33b0.address2_county" width="100" disableSorting="1" />
+          <cell name="new_pleaseshipbefore" width="100" />
+          <cell name="new_shippingpriority" width="100" />
+          <cell name="a_787f7cf13a56e51180e73863bb3c33b0.cdss_addressline1" width="100" disableSorting="1" />
+          <cell name="a_787f7cf13a56e51180e73863bb3c33b0.cdss_city" width="100" disableSorting="1" />
+          <cell name="a_787f7cf13a56e51180e73863bb3c33b0.cdss_county" width="100" disableSorting="1" />
+          <cell name="modifiedby" width="100" />
+          <cell name="modifiedon" width="100" />
+          <cell name="cdss_requireddealer" width="100" />
+          <cell name="cdss_requiredenduser" width="100" />
+          <cell name="new_requireddepot" width="100" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+        <entity name="new_serialno">
+          <attribute name="new_name" />
+          <attribute name="new_meridianproductcode" />
+          <attribute name="modifiedon" />
+          <attribute name="modifiedby" />
+          <attribute name="new_depotid" />
+          <attribute name="new_shippingpriority" />
+          <attribute name="new_pleaseshipbefore" />
+          <attribute name="cdss_machinestatus" />
+          <attribute name="cdss_dealerid" />
+          <order attribute="new_pleaseshipbefore" descending="false" />
+          <order attribute="new_shippingpriority" descending="false" />
+          <filter type="and">
+            <condition attribute="cdss_requiresmove" operator="eq" value="1" />
+          </filter>
+          <link-entity name="account" from="accountid" to="cdss_dealerid" visible="false" link-type="outer" alias="a_e126c2c0574ae51180d83863bb3c33b0">
+            <attribute name="cdss_mobileno" />
+            <attribute name="address2_county" />
+            <attribute name="address2_city" />
+          </link-entity>
+          <link-entity name="new_farmhanddepot" from="new_farmhanddepotid" to="new_requireddepot" visible="false" link-type="outer" alias="a_787f7cf13a56e51180e73863bb3c33b0">
+            <attribute name="cdss_county" />
+            <attribute name="cdss_city" />
+            <attribute name="cdss_addressline1" />
+          </link-entity>
+          <attribute name="new_requireddepot" />
+          <attribute name="cdss_requiredenduser" />
+          <attribute name="cdss_requireddealer" />
+          <attribute name="new_serialnoid" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="05. Machines To Be Moved" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="All machines that have requires move selected" languagecode="1033" />
+    </Descriptions>
+  </savedquery>
+</savedqueries>

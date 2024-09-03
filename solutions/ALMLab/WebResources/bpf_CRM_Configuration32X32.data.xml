@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebResource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WebResourceId>{e69450e2-97ed-ee11-a1fd-000d3adf1fe7}</WebResourceId>
+  <Name>bpf_CRM_Configuration32X32</Name>
+  <DisplayName>bpf_CRM_Configuration32X32</DisplayName>
+  <LanguageCode>1033</LanguageCode>
+  <WebResourceType>5</WebResourceType>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsEnabledForMobileClient>0</IsEnabledForMobileClient>
+  <IsAvailableForMobileOffline>0</IsAvailableForMobileOffline>
+  <DependencyXml>&lt;Dependencies&gt;&lt;Dependency componentType="WebResource"/&gt;&lt;/Dependencies&gt;</DependencyXml>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/bpf_CRM_Configuration32X32E69450E2-97ED-EE11-A1FD-000D3ADF1FE7</FileName>
+</WebResource>
