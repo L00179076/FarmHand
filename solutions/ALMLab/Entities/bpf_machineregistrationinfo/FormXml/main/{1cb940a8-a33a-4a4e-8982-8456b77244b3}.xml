@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{1cb940a8-a33a-4a4e-8982-8456b77244b3}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{00197686-08fa-4cf2-aa7e-f781a7d2d25e}" IsUserDefined="1" labelid="{23598d7c-b5b6-4a9e-9f98-27442a67a7d7}">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{6cb32cfe-079f-414f-9166-5e6aee73783b}" name="{6cb32cfe-079f-414f-9166-5e6aee73783b}" columns="11" locklevel="0" labelwidth="130" celllabelalignment="Left" celllabelposition="Left" labelid="{d48eaf80-31d6-4f39-a4e9-9013eb800846}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{8712465a-456b-4870-a365-86465057d7cc}" showlabel="true" locklevel="0" visible="false" labelid="{b2ad0ae2-cdca-45d6-b7ca-fbc62ef60dee}">
+                        <labels>
+                          <label description="Serial No" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_serialno" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="bpf_serialno" uniqueid="{518092bb-3d98-63c8-a43e-57ae30d7316d}" disabled="true" />
+                      </cell>
+                      <cell id="{e79180d7-0078-80a0-5304-61ba8ceca773}" showlabel="true" locklevel="0" labelid="{2cbbd136-4d96-4cc2-8ba3-d05d9d32d97f}">
+                        <labels>
+                          <label description="Extended Warranty" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_extendedwarranty" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="bpf_extendedwarranty" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{892261da-80c9-8299-3544-36ea232a9bd7}" showlabel="true" locklevel="0" labelid="{3d7354a1-0229-4189-817c-bdbe483a3ce2}">
+                        <labels>
+                          <label description="Serial No Id" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_serialnoid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bpf_serialnoid" disabled="false" uniqueid="{ecbb17c5-8360-a1a6-61da-c07ed38c73d2}">
+                          <parameters>
+                            <AutoResolve>true</AutoResolve>
+                            <DisableMru>false</DisableMru>
+                            <DisableQuickFind>false</DisableQuickFind>
+                            <DisableViewPicker>true</DisableViewPicker>
+                            <DefaultViewId>{9B8DE124-2B2E-EF11-840A-000D3AB95C4B}</DefaultViewId>
+                            <AllowFilterOff>false</AllowFilterOff>
+                          </parameters>
+                        </control>
+                      </cell>
+                      <cell id="{8b153088-9cce-439e-b08f-52c3a85d3fbf}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Sales Registration Date" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_salesregistrationdate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="bpf_salesregistrationdate" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{38907983-d9d7-4dd1-a336-de96193a5982}" locklevel="0" colspan="1" rowspan="1" showlabel="true">
+                        <labels>
+                          <label description="Dealer" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_dealer" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bpf_dealer" disabled="true" uniqueid="{d69c2319-b60a-0a06-9ee0-4e1923386293}">
+                          <parameters>
+                            <AutoResolve>true</AutoResolve>
+                            <DisableMru>false</DisableMru>
+                            <DisableQuickFind>false</DisableQuickFind>
+                            <DisableViewPicker>false</DisableViewPicker>
+                            <DefaultViewId>{A9AF0AB8-861D-4CFA-92A5-C6281FED7FAB}</DefaultViewId>
+                            <AllowFilterOff>false</AllowFilterOff>
+                            <useMainFormDialogForCreate>false</useMainFormDialogForCreate>
+                          </parameters>
+                        </control>
+                      </cell>
+                      <cell id="{159fac8e-c0ec-4ae4-ab17-2c8604822f32}" locklevel="0" colspan="1" rowspan="1" showlabel="true">
+                        <labels>
+                          <label description="Status" languagecode="1033" />
+                        </labels>
+                        <control id="cr74d_status" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="cr74d_status" disabled="false" uniqueid="{c62b0b32-d625-3aad-245d-cdb781c79e3e}" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{8b459355-b060-1106-e95b-650be16ee65e}" showlabel="false" colspan="1" auto="false" labelid="{a88c3a09-2c12-4fed-880a-7e24821921f0}">
+                        <labels>
+                          <label description="SerialNoDetails" languagecode="1033" />
+                        </labels>
+                        <control id="SerialNoDetails" classid="{5C5600E0-1D6E-4205-A272-BE80DA87FD42}" datafieldname="bpf_serialnoid" disabled="false">
+                          <parameters>
+                            <QuickForms>&lt;QuickFormIds&gt;&lt;QuickFormId entityname="new_serialno"&gt;67b90757-2467-4bf3-8f5d-145847d9126c&lt;/QuickFormId&gt;&lt;/QuickFormIds&gt;</QuickForms>
+                            <ControlMode>Edit</ControlMode>
+                            <DisplayAsCustomer360Tile>false</DisplayAsCustomer360Tile>
+                          </parameters>
+                        </control>
+                      </cell>
+                      <cell id="{24da0069-9831-72c7-31ba-b25aa39c4648}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ce9cd19a-4e35-3281-68da-7739b175bcd6}" showlabel="true" locklevel="0" labelid="{c5d5ce97-9332-49cc-b92b-10c18b5094bb}">
+                        <labels>
+                          <label description="End User" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_enduser" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bpf_enduser" disabled="false" uniqueid="{1935e3d3-59b8-882e-a6c4-10b42c32ae82}">
+                          <parameters>
+                            <AutoResolve>true</AutoResolve>
+                            <DisableMru>true</DisableMru>
+                            <DisableQuickFind>false</DisableQuickFind>
+                            <DisableViewPicker>false</DisableViewPicker>
+                            <DefaultViewId>{A2D479C5-53E3-4C69-ADDD-802327E67A0D}</DefaultViewId>
+                            <DependentAttributeType>account</DependentAttributeType>
+                            <AllowFilterOff>false</AllowFilterOff>
+                          </parameters>
+                        </control>
+                      </cell>
+                      <cell id="{e6972ae3-b6d7-9239-5b5d-b7a81093bb13}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{af6f3434-8bbc-44e3-b5e1-fa00146bb5e7}" showlabel="true" locklevel="1" visible="false" labelid="{cfe0e11e-1adf-4c2e-8fba-66396d32e20a}">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" uniqueid="{6826682b-0509-8367-1091-4747c2e52348}" disabled="true">
+                          <parameters>
+                            <AutoResolve>true</AutoResolve>
+                            <DisableMru>false</DisableMru>
+                          </parameters>
+                        </control>
+                      </cell>
+                      <cell id="{e6aada8b-81b8-e183-22b0-40c537084dc3}" showlabel="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <Navigation>
+        <NavBar></NavBar>
+        <NavBarAreas>
+          <NavBarArea Id="Info">
+            <Titles>
+              <Title LCID="1033" Text="Common" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="Sales">
+            <Titles>
+              <Title LCID="1033" Text="Sales" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="Service">
+            <Titles>
+              <Title LCID="1033" Text="Service" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="Marketing">
+            <Titles>
+              <Title LCID="1033" Text="Marketing" />
+            </Titles>
+          </NavBarArea>
+          <NavBarArea Id="ProcessCenter">
+            <Titles>
+              <Title LCID="1033" Text="Process Sessions" />
+            </Titles>
+          </NavBarArea>
+        </NavBarAreas>
+      </Navigation>
+      <controlDescriptions />
+      <header id="{47e5116c-c42d-4973-9ba6-70bfe793c1cb}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{fdfa517a-9e8e-4ee0-8e65-1eb0f19df266}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{8d395aaa-61cc-450c-960c-d26a5b47a420}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{d21170c2-2494-4bea-9953-53f21aec80b4}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{72a8bb6b-633c-4f07-aba4-c9ae5ab6ed67}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{cd4b12c8-1cdc-447d-bdc9-5be9885bc8c9}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{2d4bb09d-48cd-4c1c-a8bd-5ba53dc1de82}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{3b8773f0-e591-4a45-ad3b-348d9baded22}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="1">
+        <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
+        <Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Machine Registration - Web" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

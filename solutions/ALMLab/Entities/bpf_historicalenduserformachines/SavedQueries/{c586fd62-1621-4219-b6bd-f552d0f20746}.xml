@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>1</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{c586fd62-1621-4219-b6bd-f552d0f20746}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="bpf_serialno" select="1" icon="1" preview="1">
+        <row name="result" id="bpf_historicalenduserformachinesid">
+          <cell name="bpf_serialnumber" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+          <cell name="bpf_enduser" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+          <cell name="bpf_dealer" width="200" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+          <cell name="modifiedon" width="100" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>4</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bpf_historicalenduserformachines">
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <filter type="or" isquickfindfields="1">
+            <condition attribute="bpf_serialno" operator="like" value="{0}" />
+          </filter>
+          <attribute name="modifiedon" />
+          <attribute name="bpf_dealer" />
+          <attribute name="bpf_serialnumber" />
+          <attribute name="bpf_historicalenduserformachinesid" />
+          <attribute name="bpf_enduser" />
+          <order attribute="modifiedon" descending="true" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.1</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Quick Find Active Historical End User for Machines" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>
