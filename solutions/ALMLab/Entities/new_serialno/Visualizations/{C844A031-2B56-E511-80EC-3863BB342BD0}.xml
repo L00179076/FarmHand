@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<visualization xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedqueryvisualizationid>{C844A031-2B56-E511-80EC-3863BB342BD0}</savedqueryvisualizationid>
+  <datadescription>new_serialno</datadescription>
+  <presentationdescription>new_serialno</presentationdescription>
+  <isdefault>0</isdefault>
+  <webresourcename>dd_chartMap.htm</webresourcename>
+  <LocalizedNames>
+    <LocalizedName description="Machine Locations" languagecode="1033" />
+  </LocalizedNames>
+  <IsCustomizable>1</IsCustomizable>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <CanBeDeleted>1</CanBeDeleted>
+</visualization>

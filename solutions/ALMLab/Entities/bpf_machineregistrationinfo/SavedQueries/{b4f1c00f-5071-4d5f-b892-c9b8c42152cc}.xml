@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{b4f1c00f-5071-4d5f-b892-c9b8c42152cc}</savedqueryid>
+    <layoutxml>
+      <grid name="bpf_machineregistrationinfos" jump="bpf_serialno" select="1" icon="1" preview="0">
+        <row name="bpf_machineregistrationinfo" id="bpf_machineregistrationinfoid">
+          <cell name="bpf_serialno" width="300" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>64</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="bpf_machineregistrationinfo">
+          <attribute name="bpf_machineregistrationinfoid" />
+          <attribute name="bpf_serialno" />
+          <attribute name="createdon" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.1</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Machine Registration Info Lookup View" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>
