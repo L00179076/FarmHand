@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppModule>
+  <UniqueName>cr74d_FarmhandCRM</UniqueName>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <WebResourceId>953b9fac-1e5e-e611-80d6-00155ded156f</WebResourceId>
+  <OptimizedFor></OptimizedFor>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <FormFactor>1</FormFactor>
+  <ClientType>4</ClientType>
+  <NavigationType>0</NavigationType>
+  <AppModuleComponents>
+    <AppModuleComponent type="1" schemaName="account" />
+    <AppModuleComponent type="1" schemaName="activitypointer" />
+    <AppModuleComponent type="1" schemaName="appointment" />
+    <AppModuleComponent type="1" schemaName="bpf_crmconfiguration" />
+    <AppModuleComponent type="1" schemaName="bpf_dealerlaborrate" />
+    <AppModuleComponent type="1" schemaName="bpf_machineregistrationinfo" />
+    <AppModuleComponent type="1" schemaName="bulkoperation" />
+    <AppModuleComponent type="1" schemaName="campaign" />
+    <AppModuleComponent type="1" schemaName="campaignresponse" />
+    <AppModuleComponent type="1" schemaName="cdss_attributemapping" />
+    <AppModuleComponent type="1" schemaName="cdss_autonumber" />
+    <AppModuleComponent type="1" schemaName="cdss_infopath_entitymap" />
+    <AppModuleComponent type="1" schemaName="cdss_infopath_fieldmap" />
+    <AppModuleComponent type="1" schemaName="cdss_interface" />
+    <AppModuleComponent type="1" schemaName="cdss_interfacestep" />
+    <AppModuleComponent type="1" schemaName="cdss_referenceconfiguration" />
+    <AppModuleComponent type="1" schemaName="cdss_salesordersync" />
+    <AppModuleComponent type="1" schemaName="cdss_trace" />
+    <AppModuleComponent type="1" schemaName="competitor" />
+    <AppModuleComponent type="1" schemaName="contact" />
+    <AppModuleComponent type="1" schemaName="contract" />
+    <AppModuleComponent type="1" schemaName="dd_chartmapentity" />
+    <AppModuleComponent type="1" schemaName="email" />
+    <AppModuleComponent type="1" schemaName="expiredprocess" />
+    <AppModuleComponent type="1" schemaName="goal" />
+    <AppModuleComponent type="1" schemaName="goalrollupquery" />
+    <AppModuleComponent type="1" schemaName="incident" />
+    <AppModuleComponent type="1" schemaName="invoice" />
+    <AppModuleComponent type="1" schemaName="kbarticle" />
+    <AppModuleComponent type="1" schemaName="knowledgearticle" />
+    <AppModuleComponent type="1" schemaName="lead" />
+    <AppModuleComponent type="1" schemaName="leadtoopportunitysalesprocess" />
+    <AppModuleComponent type="1" schemaName="list" />
+    <AppModuleComponent type="1" schemaName="mbs_pluginprofile" />
+    <AppModuleComponent type="1" schemaName="metric" />
+    <AppModuleComponent type="1" schemaName="msdyn_bpf_0fc73e8e5fbd4cf3aedeaf4825cdcb5e" />
+    <AppModuleComponent type="1" schemaName="msdyn_bpf_9afa9e0f8ea948cbb770831927ec3fd3" />
+    <AppModuleComponent type="1" schemaName="msdyn_postconfig" />
+    <AppModuleComponent type="1" schemaName="msdyn_postruleconfig" />
+    <AppModuleComponent type="1" schemaName="msdyn_solutionhistory" />
+    <AppModuleComponent type="1" schemaName="msdyn_upgraderun" />
+    <AppModuleComponent type="1" schemaName="new__test" />
+    <AppModuleComponent type="1" schemaName="new_accountstatus" />
+    <AppModuleComponent type="1" schemaName="new_bizcategory" />
+    <AppModuleComponent type="1" schemaName="new_brand" />
+    <AppModuleComponent type="1" schemaName="new_bulkservicejob" />
+    <AppModuleComponent type="1" schemaName="new_channel" />
+    <AppModuleComponent type="1" schemaName="new_contactrole" />
+    <AppModuleComponent type="1" schemaName="new_contacttype" />
+    <AppModuleComponent type="1" schemaName="new_correctiontype" />
+    <AppModuleComponent type="1" schemaName="new_country" />
+    <AppModuleComponent type="1" schemaName="new_county" />
+    <AppModuleComponent type="1" schemaName="new_creditnote" />
+    <AppModuleComponent type="1" schemaName="new_crmgroup" />
+    <AppModuleComponent type="1" schemaName="new_damagesubtype" />
+    <AppModuleComponent type="1" schemaName="new_dealer" />
+    <AppModuleComponent type="1" schemaName="new_dealertype" />
+    <AppModuleComponent type="1" schemaName="new_dealerupload" />
+    <AppModuleComponent type="1" schemaName="new_demo" />
+    <AppModuleComponent type="1" schemaName="new_demostage" />
+    <AppModuleComponent type="1" schemaName="new_enduser" />
+    <AppModuleComponent type="1" schemaName="new_endusertype" />
+    <AppModuleComponent type="1" schemaName="new_farmhanddepot" />
+    <AppModuleComponent type="1" schemaName="new_issuecategory" />
+    <AppModuleComponent type="1" schemaName="new_issuesubcategory" />
+    <AppModuleComponent type="1" schemaName="new_issuetype" />
+    <AppModuleComponent type="1" schemaName="new_joblineitempriority" />
+    <AppModuleComponent type="1" schemaName="new_machinehistory" />
+    <AppModuleComponent type="1" schemaName="new_machinesale" />
+    <AppModuleComponent type="1" schemaName="new_machinesalepart" />
+    <AppModuleComponent type="1" schemaName="new_machinesalestage" />
+    <AppModuleComponent type="1" schemaName="new_machinespecdetail" />
+    <AppModuleComponent type="1" schemaName="new_machinetypeforwarranty" />
+    <AppModuleComponent type="1" schemaName="new_mainarea" />
+    <AppModuleComponent type="1" schemaName="new_mainarea2" />
+    <AppModuleComponent type="1" schemaName="new_meridianactstatus" />
+    <AppModuleComponent type="1" schemaName="new_meridianproductcode" />
+    <AppModuleComponent type="1" schemaName="new_partsource" />
+    <AppModuleComponent type="1" schemaName="new_performancerating" />
+    <AppModuleComponent type="1" schemaName="new_positivity" />
+    <AppModuleComponent type="1" schemaName="new_priority" />
+    <AppModuleComponent type="1" schemaName="new_productmaingroup" />
+    <AppModuleComponent type="1" schemaName="new_productsubgroup" />
+    <AppModuleComponent type="1" schemaName="new_reasonforlossofsale" />
+    <AppModuleComponent type="1" schemaName="new_reasonforreturn" />
+    <AppModuleComponent type="1" schemaName="new_reasonforsitevisit" />
+    <AppModuleComponent type="1" schemaName="new_reportinggroup" />
+    <AppModuleComponent type="1" schemaName="new_salesorder" />
+    <AppModuleComponent type="1" schemaName="new_salesorderdetail" />
+    <AppModuleComponent type="1" schemaName="new_sequencenumber" />
+    <AppModuleComponent type="1" schemaName="new_serialno" />
+    <AppModuleComponent type="1" schemaName="new_serialnostage" />
+    <AppModuleComponent type="1" schemaName="new_serviceissue" />
+    <AppModuleComponent type="1" schemaName="new_serviceissuestage" />
+    <AppModuleComponent type="1" schemaName="new_servicejob" />
+    <AppModuleComponent type="1" schemaName="new_servicejobcategory" />
+    <AppModuleComponent type="1" schemaName="new_servicejobitem" />
+    <AppModuleComponent type="1" schemaName="new_servicejobitemtype" />
+    <AppModuleComponent type="1" schemaName="new_servicejoblabourcost" />
+    <AppModuleComponent type="1" schemaName="new_servicejoblineitemstage" />
+    <AppModuleComponent type="1" schemaName="new_servicejobs" />
+    <AppModuleComponent type="1" schemaName="new_servicejobstage" />
+    <AppModuleComponent type="1" schemaName="new_servicejobtype" />
+    <AppModuleComponent type="1" schemaName="new_sitevisit" />
+    <AppModuleComponent type="1" schemaName="new_sizeband" />
+    <AppModuleComponent type="1" schemaName="new_subarea" />
+    <AppModuleComponent type="1" schemaName="new_subarea2" />
+    <AppModuleComponent type="1" schemaName="new_supplier" />
+    <AppModuleComponent type="1" schemaName="new_suppliercodeimpor" />
+    <AppModuleComponent type="1" schemaName="new_suppliercodeversionimport" />
+    <AppModuleComponent type="1" schemaName="new_termofdelivery" />
+    <AppModuleComponent type="1" schemaName="new_truck" />
+    <AppModuleComponent type="1" schemaName="new_typesofdamage" />
+    <AppModuleComponent type="1" schemaName="new_weathercondition" />
+    <AppModuleComponent type="1" schemaName="newprocess" />
+    <AppModuleComponent type="1" schemaName="opportunity" />
+    <AppModuleComponent type="1" schemaName="opportunitysalesprocess" />
+    <AppModuleComponent type="1" schemaName="phonetocaseprocess" />
+    <AppModuleComponent type="1" schemaName="product" />
+    <AppModuleComponent type="1" schemaName="queue" />
+    <AppModuleComponent type="1" schemaName="queueitem" />
+    <AppModuleComponent type="1" schemaName="quote" />
+    <AppModuleComponent type="1" schemaName="report" />
+    <AppModuleComponent type="1" schemaName="salesliterature" />
+    <AppModuleComponent type="1" schemaName="salesorder" />
+    <AppModuleComponent type="1" schemaName="service" />
+    <AppModuleComponent type="1" schemaName="sharepointdocumentlocation" />
+    <AppModuleComponent type="1" schemaName="sharepointsite" />
+    <AppModuleComponent type="1" schemaName="solution" />
+    <AppModuleComponent type="1" schemaName="syncerror" />
+    <AppModuleComponent type="1" schemaName="task" />
+    <AppModuleComponent type="1" schemaName="translationprocess" />
+    <AppModuleComponent type="1" schemaName="workflow" />
+    <AppModuleComponent type="26" id="{00000000-0000-0000-00aa-000010001002}" />
+    <AppModuleComponent type="26" id="{00000000-0000-0000-00aa-000010003000}" />
+    <AppModuleComponent type="26" id="{00000000-0000-0000-00aa-000010003001}" />
+    <AppModuleComponent type="26" id="{9ebf4198-db4d-ea11-a812-000d3ab70c7c}" />
+    <AppModuleComponent type="26" id="{c09ab703-b851-ea11-a812-000d3ab7195c}" />
+    <AppModuleComponent type="26" id="{77f8ff18-2d5b-eb11-a812-000d3ab7195c}" />
+    <AppModuleComponent type="26" id="{07fe2ae7-2d5b-eb11-a812-000d3ab7195c}" />
+    <AppModuleComponent type="26" id="{4c5e5179-3bdd-ea11-a813-000d3ad8be46}" />
+    <AppModuleComponent type="26" id="{c6f6fc1b-1b3e-e711-80e1-00155d871bb4}" />
+    <AppModuleComponent type="26" id="{b56193d9-92e9-4307-8a1d-0e41897d1789}" />
+    <AppModuleComponent type="26" id="{e681d597-4929-e511-80e0-3863bb343bf8}" />
+    <AppModuleComponent type="26" id="{6bc4de05-4e29-e511-80e0-3863bb343bf8}" />
+    <AppModuleComponent type="26" id="{ccaa005e-5f29-e511-80e0-3863bb343bf8}" />
+    <AppModuleComponent type="26" id="{cf324f8a-adb8-e511-8113-3863bb344b00}" />
+    <AppModuleComponent type="26" id="{30641df4-9acb-e511-8118-3863bb344b00}" />
+    <AppModuleComponent type="26" id="{c61c9c60-9bcb-e511-8118-3863bb344b00}" />
+    <AppModuleComponent type="26" id="{f047ac9e-0bc9-e511-8114-3863bb351e10}" />
+    <AppModuleComponent type="26" id="{248ca8f1-10c9-e511-8114-3863bb351e10}" />
+    <AppModuleComponent type="26" id="{f492fd5d-b7c9-e511-8114-3863bb351e10}" />
+    <AppModuleComponent type="26" id="{14419c11-0857-e511-80eb-3863bb354ff8}" />
+    <AppModuleComponent type="26" id="{2ded444d-799b-e511-80f7-3863bb354ff8}" />
+    <AppModuleComponent type="26" id="{2ff0d796-7a9b-e511-80f7-3863bb354ff8}" />
+    <AppModuleComponent type="26" id="{d133fc02-7b9b-e511-80f7-3863bb354ff8}" />
+    <AppModuleComponent type="26" id="{6f6ffe94-7b9b-e511-80f7-3863bb354ff8}" />
+    <AppModuleComponent type="26" id="{1b9c19ba-8ea3-e511-80f7-3863bb354ff8}" />
+    <AppModuleComponent type="26" id="{6d079d9a-9f3a-e511-80ea-3863bb355d80}" />
+    <AppModuleComponent type="26" id="{38e68a33-92cf-e511-8119-3863bb3630e0}" />
+    <AppModuleComponent type="26" id="{01235a2f-395b-e511-80e8-3863bb3c33b0}" />
+    <AppModuleComponent type="26" id="{6fc5b190-1195-e511-8108-3863bb3c33b0}" />
+    <AppModuleComponent type="26" id="{6cf285aa-eb20-4277-925a-3e9735411ff0}" />
+    <AppModuleComponent type="26" id="{39a4f172-8389-e711-8105-5065f38a3951}" />
+    <AppModuleComponent type="26" id="{39a6cc85-8973-e711-8104-5065f38a4ae1}" />
+    <AppModuleComponent type="26" id="{c0f272f7-fa75-e711-8102-5065f38a99d1}" />
+    <AppModuleComponent type="26" id="{c40919aa-3683-e711-8104-5065f38a99d1}" />
+    <AppModuleComponent type="26" id="{92c45755-a8fa-e711-8118-5065f38a99d1}" />
+    <AppModuleComponent type="26" id="{2006d3e8-bdfa-e711-8118-5065f38a99d1}" />
+    <AppModuleComponent type="26" id="{491af25e-4f64-e611-80e4-5065f38a9b21}" />
+    <AppModuleComponent type="26" id="{4595fec0-7b73-e611-80e8-5065f38adaa1}" />
+    <AppModuleComponent type="26" id="{35eb1c32-135e-e611-80e3-5065f38b15c1}" />
+    <AppModuleComponent type="26" id="{63aa8a47-856f-e611-80e6-5065f38b15c1}" />
+    <AppModuleComponent type="26" id="{6413fba0-a860-e711-80ff-5065f38bc5a1}" />
+    <AppModuleComponent type="26" id="{499099eb-ab60-e711-80ff-5065f38bc5a1}" />
+    <AppModuleComponent type="26" id="{8bfdb0f8-a7c1-e811-8146-5065f38be311}" />
+    <AppModuleComponent type="26" id="{6dfe0e71-a9c1-e811-8146-5065f38be311}" />
+    <AppModuleComponent type="26" id="{73c0d68f-a9c1-e811-8146-5065f38be311}" />
+    <AppModuleComponent type="26" id="{5b5f75f6-b585-4212-952a-b4cbb64e2627}" />
+    <AppModuleComponent type="26" id="{606eea12-0c33-47d3-96e1-ba1529ee8205}" />
+    <AppModuleComponent type="29" id="{54ff5f4a-89f7-4836-a8e0-6ccf676a193b}" />
+    <AppModuleComponent type="60" id="{864902c4-0957-ea11-a811-000d3ab70c7c}" />
+    <AppModuleComponent type="60" id="{4dfb5e61-d14d-ea11-a812-000d3ab70c7c}" />
+    <AppModuleComponent type="60" id="{0a378b1e-454e-ea11-a812-000d3ab70c7c}" />
+    <AppModuleComponent type="60" id="{2bb1a604-8c51-ea11-a812-000d3ab70c7c}" />
+    <AppModuleComponent type="60" id="{987e1c00-9e51-ea11-a812-000d3ab70c7c}" />
+    <AppModuleComponent type="60" id="{4cd45c5d-29b3-48d3-997a-2bc3f8beeba8}" />
+    <AppModuleComponent type="60" id="{549a8aa3-c349-4ab9-8bac-4873fa9a7a5c}" />
+    <AppModuleComponent type="60" id="{0a679ce8-6e4f-e711-8101-5065f38a4ae1}" />
+    <AppModuleComponent type="60" id="{f5af0c79-97db-4c3f-8d7e-62b53d9062d4}" />
+    <AppModuleComponent type="60" id="{5895e983-598b-4834-80f9-68a4e9f4f744}" />
+    <AppModuleComponent type="62" schemaName="cr74d_FarmhandCRM" />
+  </AppModuleComponents>
+  <AppModuleRoleMaps>
+    <Role id="{25895535-3224-e311-a807-e83935b0bf0e}" />
+    <Role id="{56721409-3c24-e311-a807-e83935b0bf0e}" />
+    <Role id="{08c63b5d-3224-e311-a807-e83935b0bf0e}" />
+    <Role id="{323b5c65-3224-e311-a807-e83935b0bf0e}" />
+    <Role id="{39160bf1-3a24-e311-a807-e83935b0bf0e}" />
+    <Role id="{29cbe9d4-7248-e311-a807-e83935b0bf0e}" />
+    <Role id="{cb269f84-e19d-e011-b66c-00155db528b6}" />
+    <Role id="{4758a2be-ccd8-ea11-a813-000d3a579805}" />
+    <Role id="{61649654-ced8-ea11-a813-000d3a579805}" />
+    <Role id="{236750cd-45ae-4939-ab12-b24b920ced93}" />
+    <Role id="{88b87c37-1472-4798-ac48-d56509eb6e1d}" />
+    <Role id="{e0d2794e-82f3-e811-a951-000d3a1bcf17}" />
+    <Role id="{2fe4d72e-e538-ea11-a81c-000d3ac3e6d8}" />
+    <Role id="{20902168-ee38-ea11-a81c-000d3ac3e6d8}" />
+    <Role id="{a1801436-efd6-e811-a96e-000d3a3ab886}" />
+    <Role id="{85937b6b-91a1-46ed-9778-929fc9f61812}" />
+    <Role id="{7d329351-1ef5-e611-80ee-c4346bad1238}" />
+    <Role id="{1808b939-dd07-4ca7-aa99-ddd2734378f1}" />
+    <Role id="{3dac4d9e-568c-e611-80d4-00155d42a122}" />
+    <Role id="{ecfd0b44-5720-45e3-ae68-417ddb0fb654}" />
+    <Role id="{90bb098b-d3b6-ea11-a812-000d3a31eec8}" />
+    <Role id="{edfcbfd2-358f-ea11-a81f-000d3a6eafd3}" />
+    <Role id="{d892cc0b-28c7-4e88-bd92-72f2c366baed}" />
+    <Role id="{2407db5e-edae-4e36-9be1-fd61d4d15809}" />
+    <Role id="{8c8d4f51-a72b-e511-80d9-3863bb349780}" />
+    <Role id="{6f960e32-a72b-e511-80d9-3863bb349780}" />
+    <Role id="{2c321cf0-f096-ea11-a81a-000d3a6ecd99}" />
+    <Role id="{7be5a395-6b58-4f8c-908f-97dc8810fc50}" />
+    <Role id="{d58407f2-48d5-e711-a82c-000d3a37c848}" />
+    <Role id="{4931681d-8163-e811-a965-000d3a11fe32}" />
+    <Role id="{9aeec387-945c-ea11-a811-000d3ab7195c}" />
+    <Role id="{d110d819-9b72-430f-894a-94dc87e04519}" />
+    <Role id="{7bc42107-2fba-4a47-9d1d-51877a3be378}" />
+    <Role id="{e739f82a-9519-e911-817c-000d3a0718d1}" />
+    <Role id="{c30c8811-9519-e911-817c-000d3a0718d1}" />
+    <Role id="{a855e539-7253-43d3-9ee5-43ea042b7823}" />
+    <Role id="{0e72f536-3a3a-4e74-96e9-3cab5effe10c}" />
+    <Role id="{f3d2098f-9eb0-45b3-9c7d-96526af614c4}" />
+    <Role id="{5e4a9faa-b260-e611-8106-00155db8820b}" />
+    <Role id="{05f9a03f-5534-4b26-9bba-0726d33c6351}" />
+    <Role id="{b4b40b17-cf37-4ea8-b2c5-b580f2f48654}" />
+    <Role id="{cc0df9af-925c-ea11-a811-000d3ab7195c}" />
+    <Role id="{d9d602db-2761-4170-877f-983494567c08}" />
+    <Role id="{09a25608-d28b-4d47-b57c-79271fe6a525}" />
+    <Role id="{efcc3ead-5983-44c6-8075-103d04904ebc}" />
+    <Role id="{94168bac-ed39-e911-a961-000d3ab6d5d9}" />
+    <Role id="{4178df9e-4ea5-e811-8149-000d3a3a2732}" />
+    <Role id="{4178df9e-4ea5-e811-8149-000d3a3a2731}" />
+    <Role id="{6beb51c1-0eda-e911-a81c-000d3af75d63}" />
+    <Role id="{c49aae0a-0fda-e911-a81c-000d3af75d63}" />
+    <Role id="{f9a5a958-d07f-44cd-886d-eb6343309c2a}" />
+    <Role id="{016fd16e-7be7-e611-80d6-00155d204901}" />
+    <Role id="{cf854fc2-925c-ea11-a811-000d3ab7195c}" />
+    <Role id="{c0ed2f4f-6f92-4691-92ba-78f2931e8fba}" />
+    <Role id="{3b158730-54af-e311-a89a-ac162dbe3ffe}" />
+    <Role id="{d77ee98d-945c-ea11-a811-000d3ab7195c}" />
+    <Role id="{b5b6cb27-47e9-49f7-84bb-f6823fc8461c}" />
+    <Role id="{7e13fe7f-ea02-4a4e-a523-89ed9361961d}" />
+    <Role id="{a4be89ff-7c35-4d69-9900-999c3f603e6f}" />
+    <Role id="{debec338-bca7-4882-ae04-84e6ddda2984}" />
+    <Role id="{dcd60b89-421c-44ae-bff0-dd6323df885c}" />
+    <Role id="{e05075eb-9d74-e811-a95c-000d3a1c53e4}" />
+    <Role id="{2d101bb3-5ced-4122-83f1-94d5efde4e3b}" />
+    <Role id="{abce3b01-5697-4973-9d7d-fca48ca84445}" />
+    <Role id="{627090ff-40a3-4053-8790-584edc5be201}" />
+    <Role id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+    <Role id="{6caba073-59a8-4d6b-8e7b-4ccb50c5166b}" />
+    <Role id="{29123793-6ae5-4955-9f1a-f10ceb9705f1}" />
+    <Role id="{36afe49c-9082-e311-a837-e83935b0bf0e}" />
+  </AppModuleRoleMaps>
+  <LocalizedNames>
+    <LocalizedName description="Farmhand" languagecode="1033" />
+  </LocalizedNames>
+</AppModule>
