@@ -177,7 +177,8 @@ jobs:
 
   jmeter-test:
     runs-on: windows-latest
-    needs: [failure-response-test]
+    needs: [export-from-dev]
+    
 
     steps:
     # 1. Checkout the repository
