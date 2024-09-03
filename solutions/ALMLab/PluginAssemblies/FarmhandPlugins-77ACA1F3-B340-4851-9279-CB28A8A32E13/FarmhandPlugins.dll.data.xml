@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PluginAssembly FullName="Farmhand.Plugins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a1d5b124d95c7f2c" PluginAssemblyId="77aca1f3-b340-4851-9279-cb28a8a32e13" CustomizationLevel="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <IsolationMode>2</IsolationMode>
+  <SourceType>0</SourceType>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <FileName>/PluginAssemblies/FarmhandPlugins-77ACA1F3-B340-4851-9279-CB28A8A32E13/FarmhandPlugins.dll</FileName>
+  <PluginTypes>
+    <PluginType AssemblyQualifiedName="Farmhand.Plugins.PostUpdateAsync_MachineRegistrationInfo, Farmhand.Plugins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a1d5b124d95c7f2c" PluginTypeId="a9e99aac-d874-4a68-a346-3dfb7038eb83" Name="Farmhand.Plugins.PostUpdateAsync_MachineRegistrationInfo">
+      <FriendlyName>1d7b9581-597a-4ee2-98ea-76361c23c6c5</FriendlyName>
+    </PluginType>
+    <PluginType AssemblyQualifiedName="Farmhand.Plugins.PostUpdateAsync_SerialNumber, Farmhand.Plugins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a1d5b124d95c7f2c" PluginTypeId="a41d7b33-966c-409a-8eaa-9c86ec216fc5" Name="Farmhand.Plugins.PostUpdateAsync_SerialNumber">
+      <FriendlyName>4fe4cf82-def6-4b87-b5c6-dbf0c11214b3</FriendlyName>
+    </PluginType>
+    <PluginType AssemblyQualifiedName="Farmhand.Plugins.PostUpdateSync_ServiceJob, Farmhand.Plugins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a1d5b124d95c7f2c" PluginTypeId="b4b57e0b-3526-4ba7-97f6-85a1adaffbfd" Name="Farmhand.Plugins.PostUpdateSync_ServiceJob">
+      <FriendlyName>a9bf6eb5-e2e0-433c-98e1-feec8059f9b6</FriendlyName>
+    </PluginType>
+    <PluginType AssemblyQualifiedName="Farmhand.Plugins.PreCreateSync_MachineRegistrationInfo, Farmhand.Plugins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a1d5b124d95c7f2c" PluginTypeId="4a9ae039-ecea-4639-a051-636cd368112c" Name="Farmhand.Plugins.PreCreateSync_MachineRegistrationInfo">
+      <FriendlyName>b6c5d9ff-bd70-43bc-8b48-7f3eea4a0482</FriendlyName>
+    </PluginType>
+    <PluginType AssemblyQualifiedName="Farmhand.Plugins.PreCreateUpdate_ServiceJobItem, Farmhand.Plugins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a1d5b124d95c7f2c" PluginTypeId="85377ccd-e963-4a76-ab29-7c85e1f9a212" Name="Farmhand.Plugins.PreCreateUpdate_ServiceJobItem">
+      <FriendlyName>7d0cf75e-6bd7-46a0-9b75-ecfe9b3f541c</FriendlyName>
+    </PluginType>
+  </PluginTypes>
+</PluginAssembly>

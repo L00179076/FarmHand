@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{2bfcbb1f-7aef-e511-8123-c4346bc86bc0}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="new_name" select="1" icon="1" preview="1">
+        <row name="result" id="new_serialnoid">
+          <cell name="new_name" width="100" />
+          <cell name="new_meridianproductcode" width="150" />
+          <cell name="cdss_dealerid" width="100" />
+          <cell name="cdss_enduserid" width="100" />
+          <cell name="new_depotid" width="100" />
+          <cell name="new_stageid" width="100" />
+          <cell name="new_firstmovement_on" width="150" />
+          <cell name="new_lastmovementon" width="150" />
+          <cell name="new_noofmovements" width="150" />
+          <cell name="new_uniqueid" width="100" />
+          <cell name="createdon" width="150" />
+          <cell name="createdby" width="200" />
+          <cell name="modifiedby" width="100" />
+          <cell name="modifiedon" width="100" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+        <entity name="new_serialno">
+          <attribute name="new_name" />
+          <attribute name="new_meridianproductcode" />
+          <attribute name="createdon" />
+          <attribute name="createdby" />
+          <attribute name="new_noofmovements" />
+          <attribute name="new_lastmovementon" />
+          <attribute name="new_firstmovement_on" />
+          <attribute name="modifiedon" />
+          <attribute name="modifiedby" />
+          <attribute name="new_depotid" />
+          <attribute name="new_stageid" />
+          <attribute name="new_uniqueid" />
+          <attribute name="cdss_enduserid" />
+          <attribute name="cdss_dealerid" />
+          <order attribute="new_meridianproductcode" descending="true" />
+          <filter type="and">
+            <condition attribute="createdon" operator="on-or-after" value="2015-08-01" />
+            <condition attribute="new_name" operator="like" value="9%" />
+            <condition attribute="new_meridianproductcode" operator="in">
+              <value uiname="BIGM420" uitype="new_meridianproductcode">{53B0F372-57F8-E211-A305-AC162DB64AC6}</value>
+              <value uiname="AMR280S" uitype="new_meridianproductcode">{5EE43D57-E378-E511-8101-3863BB351E10}</value>
+              <value uiname="AMR240S" uitype="new_meridianproductcode">{4B2604A2-6833-E311-A807-E83935B0BF0E}</value>
+              <value uiname="AMR200" uitype="new_meridianproductcode">{848212AC-67A0-E511-8112-3863BB344B00}</value>
+              <value uiname="AMR200" uitype="new_meridianproductcode">{0A60BFD7-67A0-E511-8115-3863BB3630E0}</value>
+              <value uiname="ECR320CV" uitype="new_meridianproductcode">{87B0F372-57F8-E211-A305-AC162DB64AC6}</value>
+              <value uiname="ECR320" uitype="new_meridianproductcode">{89B0F372-57F8-E211-A305-AC162DB64AC6}</value>
+              <value uiname="ECR280CV" uitype="new_meridianproductcode">{4D2604A2-6833-E311-A807-E83935B0BF0E}</value>
+              <value uiname="ECR280" uitype="new_meridianproductcode">{8E11B37B-618F-E311-A837-E83935B0BF0E}</value>
+              <value uiname="EC3201CVSSA" uitype="new_meridianproductcode">{73B0F372-57F8-E211-A305-AC162DB64AC6}</value>
+              <value uiname="EC3201CV" uitype="new_meridianproductcode">{61B0F372-57F8-E211-A305-AC162DB64AC6}</value>
+              <value uiname="EC2801CV" uitype="new_meridianproductcode">{4DB0F372-57F8-E211-A305-AC162DB64AC6}</value>
+              <value uiname="B870CVSSA" uitype="new_meridianproductcode">{4C2604A2-6833-E311-A807-E83935B0BF0E}</value>
+              <value uiname="B870CV" uitype="new_meridianproductcode">{7D19A9F6-DE5A-E411-B016-6C3BE5BE5E68}</value>
+              <value uiname="B1000CVSSA" uitype="new_meridianproductcode">{7BB0F372-57F8-E211-A305-AC162DB64AC6}</value>
+              <value uiname="EC400" uitype="new_meridianproductcode">{57B0F372-57F8-E211-A305-AC162DB64AC6}</value>
+              <value uiname="ECR360" uitype="new_meridianproductcode">{BC0C47B4-2A90-E311-A837-E83935B0BF0E}</value>
+              <value uiname="EC360" uitype="new_meridianproductcode">{47B0F372-57F8-E211-A305-AC162DB64AC6}</value>
+              <value uiname="F320CVPULL" uitype="new_meridianproductcode">{44264D23-0ED5-E511-8115-3863BB351E10}</value>
+              <value uiname="F320CVPULL" uitype="new_meridianproductcode">{84564435-0ED5-E511-8115-3863BB351E10}</value>
+              <value uiname="F320CV" uitype="new_meridianproductcode">{79B0F372-57F8-E211-A305-AC162DB64AC6}</value>
+              <value uiname="F320" uitype="new_meridianproductcode">{1C2BB860-2286-E411-9E35-6C3BE5BE5E68}</value>
+              <value uiname="EC32CVF" uitype="new_meridianproductcode">{45B0F372-57F8-E211-A305-AC162DB64AC6}</value>
+              <value uiname="EC32CV" uitype="new_meridianproductcode">{8DB0F372-57F8-E211-A305-AC162DB64AC6}</value>
+              <value uiname="EC320CVQSH" uitype="new_meridianproductcode">{F8902429-A1C2-E411-B5C4-D89D67635D80}</value>
+              <value uiname="EC320CVQ" uitype="new_meridianproductcode">{81B0F372-57F8-E211-A305-AC162DB64AC6}</value>
+              <value uiname="EC3200CVSSA" uitype="new_meridianproductcode">{65B0F372-57F8-E211-A305-AC162DB64AC6}</value>
+              <value uiname="EC3200CV" uitype="new_meridianproductcode">{67B0F372-57F8-E211-A305-AC162DB64AC6}</value>
+              <value uiname="EC320" uitype="new_meridianproductcode">{6FB0F372-57F8-E211-A305-AC162DB64AC6}</value>
+              <value uiname="EC280CVQ" uitype="new_meridianproductcode">{55B0F372-57F8-E211-A305-AC162DB64AC6}</value>
+              <value uiname="EC280CV" uitype="new_meridianproductcode">{43B0F372-57F8-E211-A305-AC162DB64AC6}</value>
+              <value uiname="EC280" uitype="new_meridianproductcode">{4BB0F372-57F8-E211-A305-AC162DB64AC6}</value>
+            </condition>
+            <condition attribute="new_name" operator="not-like" value="92%" />
+          </filter>
+          <attribute name="new_serialnoid" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="11. Mowers Affected By Blade Support Recall" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

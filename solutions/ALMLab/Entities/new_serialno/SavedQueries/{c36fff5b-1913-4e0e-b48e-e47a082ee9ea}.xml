@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{c36fff5b-1913-4e0e-b48e-e47a082ee9ea}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="new_name" select="1" icon="1" preview="1">
+        <row name="result" id="new_serialnoid">
+          <cell name="new_name" width="300" />
+          <cell name="new_meridianproductcode" width="150" />
+          <cell name="cdss_dealerid" width="100" />
+          <cell name="cdss_enduserid" width="100" />
+          <cell name="new_stageid" width="100" />
+          <cell name="new_firstmovement_on" width="150" />
+          <cell name="new_lastmovementon" width="150" />
+          <cell name="modifiedby" width="100" />
+          <cell name="modifiedon" width="100" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>1</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="new_serialno">
+          <attribute name="new_name" />
+          <order attribute="new_name" descending="false" />
+          <attribute name="new_meridianproductcode" />
+          <attribute name="new_stageid" />
+          <attribute name="new_lastmovementon" />
+          <attribute name="new_firstmovement_on" />
+          <attribute name="modifiedon" />
+          <attribute name="modifiedby" />
+          <attribute name="cdss_enduserid" />
+          <attribute name="cdss_dealerid" />
+          <attribute name="new_serialnoid" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Serial No. Advanced Find View" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

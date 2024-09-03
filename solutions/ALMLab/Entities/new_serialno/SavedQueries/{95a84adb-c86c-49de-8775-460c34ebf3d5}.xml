@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{95a84adb-c86c-49de-8775-460c34ebf3d5}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="new_name" select="1" icon="1" preview="1">
+        <row name="result" id="new_serialnoid">
+          <cell name="new_name" width="100" />
+          <cell name="new_meridianproductcode" width="150" />
+          <cell name="a_de21d85bbe08e311a325ac162dbe3218.new_shortdescription" width="125" disableSorting="1" imageproviderfunctionname="" imageproviderwebresource="$webresource:" />
+          <cell name="cdss_dealerid" width="100" />
+          <cell name="cdss_enduserid" width="100" />
+          <cell name="new_depotid" width="100" />
+          <cell name="new_stageid" width="100" />
+          <cell name="new_firstmovement_on" width="150" />
+          <cell name="new_lastmovementon" width="150" />
+          <cell name="new_noofmovements" width="150" />
+          <cell name="new_uniqueid" width="100" />
+          <cell name="createdon" width="150" />
+          <cell name="createdby" width="200" />
+          <cell name="modifiedby" width="100" />
+          <cell name="modifiedon" width="100" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="new_serialno">
+          <attribute name="new_name" />
+          <order attribute="new_name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="new_meridianproductcode" />
+          <attribute name="createdon" />
+          <attribute name="createdby" />
+          <attribute name="new_noofmovements" />
+          <attribute name="new_lastmovementon" />
+          <attribute name="new_firstmovement_on" />
+          <attribute name="modifiedon" />
+          <attribute name="modifiedby" />
+          <attribute name="new_depotid" />
+          <attribute name="new_stageid" />
+          <attribute name="new_uniqueid" />
+          <attribute name="cdss_enduserid" />
+          <attribute name="cdss_dealerid" />
+          <link-entity alias="a_de21d85bbe08e311a325ac162dbe3218" name="new_meridianproductcode" from="new_meridianproductcodeid" to="new_meridianproductcode" link-type="outer" visible="false">
+            <attribute name="new_shortdescription" />
+          </link-entity>
+          <attribute name="new_serialnoid" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="01. All Active Serial No.s" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

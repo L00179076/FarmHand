@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{75049f60-4a33-ef11-8409-002248a104df}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="new_name" select="1" icon="1" preview="1">
+        <row name="result" id="new_serialnoid">
+          <cell name="new_name" width="200" />
+          <cell name="new_meridianproductcode" width="172" />
+          <cell name="cdss_dealerid" width="100" />
+          <cell name="cdss_enduserid" width="100" />
+          <cell name="new_stageid" width="100" />
+          <cell name="new_firstmovement_on" width="151" />
+          <cell name="new_lastmovementon" width="149" />
+          <cell name="createdon" width="105" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+        <entity name="new_serialno">
+          <attribute name="new_name" />
+          <attribute name="new_meridianproductcode" />
+          <attribute name="cdss_dealerid" />
+          <attribute name="cdss_enduserid" />
+          <attribute name="new_stageid" />
+          <attribute name="new_firstmovement_on" />
+          <attribute name="new_lastmovementon" />
+          <attribute name="createdon" />
+          <order attribute="new_name" descending="true" />
+          <filter type="and">
+            <condition attribute="new_enduserid" operator="not-null" />
+          </filter>
+          <attribute name="new_serialnoid" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Serial No. Registered - Web" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

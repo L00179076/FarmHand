@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{16344271-e84d-ef11-bfe2-000d3ab4681b}</formid>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab id="ACBA75B7-97B6-4116-AA55-51312992B721" name="Quick_View_DealerRates" showlabel="false" labelid="{244df7ae-a30d-40bf-bd59-895eaa060c49}">
+          <labels>
+            <label description="QuickView DealerRates" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section id="AD49B5BF-256F-46A8-9C75-947146172EB9" name="Quick_View_UnitPrice" columns="1" showlabel="false" showbar="false" IsUserDefined="0" labelwidth="130" labelid="{ac456e3a-0a1a-41f5-954a-e4d939b9b5ca}" visible="true">
+                  <labels>
+                    <label description="Quick_View_UnitPrice" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{1a5b111a-6846-4be6-851c-612bc4a56e77}" locklevel="0" colspan="1" rowspan="1" visible="false" showlabel="false">
+                        <labels>
+                          <label description="Item Type" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_itemtype" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="bpf_itemtype" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{376ed5fb-476f-487a-8b78-f03971d0cf13}" locklevel="0" colspan="1" rowspan="1" labelid="{907d5542-d5a9-40a0-8beb-58be90f758c1}">
+                        <labels>
+                          <label description="Unit Price" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_unitprice" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="bpf_unitprice" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <DisplayConditions Order="1" FallbackForm="true">
+        <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
+        <Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Dealer Labor Rate quick view form" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="to show unit price" languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>
